@@ -28,7 +28,7 @@ export default {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mikerosoft.app</title>
+    <title>Mikerosoft</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -122,7 +122,7 @@ export default {
 <body>
     <img src="https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/website/hero.png" alt="mikerosoft.app hero" class="hero" />
     <div class="header">
-        <h1>mikerosoft.app</h1>
+        <h1>Mikerosoft</h1>
         <p class="subtitle">A collection of personalised tools for Windows users.<br/>
         <a href="https://github.com/mikecann/mikerosoft" target="_blank" rel="noopener">View the repository on GitHub</a></p>
     </div>
