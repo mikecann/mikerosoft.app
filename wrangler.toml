@@ -1,3 +1,8 @@
 name = "mikerosoft-website"
 main = "src/index.js"
 compatibility_date = "2024-02-22"
+
+routes = [
+  { pattern = "mikerosoft.app", custom_domain = true },
+  { pattern = "www.mikerosoft.app", custom_domain = true }
+]
