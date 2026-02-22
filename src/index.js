@@ -1,15 +1,15 @@
 export default {
 	async fetch(request, env, ctx) {
 		const tools = [
-			{ name: 'transcribe', desc: 'Extract audio from a video and transcribe it via faster-whisper (CUDA with CPU fallback); right-click any video file in Explorer', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/transcribe/icons/film.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/transcribe' },
-			{ name: 'vid2md', desc: 'Convert a YouTube URL to a markdown image-link and copy it to clipboard; right-click any .url Internet Shortcut in Explorer', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/vid2md/icons/page_white_link.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/vid2md' },
-			{ name: 'removebg', desc: 'Remove the background from an image using rembg / birefnet-portrait; right-click any image file in Explorer', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/removebg/icons/picture.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/removebg' },
-			{ name: 'ghopen', desc: 'Open the current repo on GitHub; opens the PR page if on a PR branch; right-click any folder in Explorer', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/ghopen/icons/world_go.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/ghopen' },
-			{ name: 'ctxmenu', desc: 'Manage Explorer context menu entries - toggle shell verbs and COM handlers on/off without admin rights', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/ctxmenu/icons/application_form.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/ctxmenu' },
-			{ name: 'backup-phone', desc: 'Back up an iPhone over MTP (USB) to a flat folder on disk', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/backup-phone/icons/phone.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/backup-phone' },
-			{ name: 'scale-monitor4', desc: 'Toggle Monitor 4 between 200% (normal) and 300% (filming) scaling', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/scale-monitor4/icons/monitor.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/scale-monitor4' },
-			{ name: 'taskmon', desc: 'Real-time NET/CPU/GPU/MEM sparklines overlaid on the taskbar', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/taskmon/icons/chart_bar.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/taskmon' },
-			{ name: 'voice-type', desc: 'Push-to-talk local voice transcription - hold Right Ctrl, speak, release to paste', icon: 'https://raw.githubusercontent.com/mikecann/mikerosoft/main/tools/voice-type/icons/sound.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/voice-type' },
+			{ name: 'transcribe', desc: 'Extract audio from a video and transcribe it via faster-whisper (CUDA with CPU fallback); right-click any video file in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/transcribe/icons/film.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/transcribe' },
+			{ name: 'vid2md', desc: 'Convert a YouTube URL to a markdown image-link and copy it to clipboard; right-click any .url Internet Shortcut in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/vid2md/icons/page_white_link.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/vid2md' },
+			{ name: 'removebg', desc: 'Remove the background from an image using rembg / birefnet-portrait; right-click any image file in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/removebg/icons/picture.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/removebg' },
+			{ name: 'ghopen', desc: 'Open the current repo on GitHub; opens the PR page if on a PR branch; right-click any folder in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ghopen/icons/world_go.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/ghopen' },
+			{ name: 'ctxmenu', desc: 'Manage Explorer context menu entries - toggle shell verbs and COM handlers on/off without admin rights', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ctxmenu/icons/application_form.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/ctxmenu' },
+			{ name: 'backup-phone', desc: 'Back up an iPhone over MTP (USB) to a flat folder on disk', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/backup-phone/icons/phone.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/backup-phone' },
+			{ name: 'scale-monitor4', desc: 'Toggle Monitor 4 between 200% (normal) and 300% (filming) scaling', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/scale-monitor4/icons/monitor.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/scale-monitor4' },
+			{ name: 'taskmon', desc: 'Real-time NET/CPU/GPU/MEM sparklines overlaid on the taskbar', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/taskmon/icons/chart_bar.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/taskmon' },
+			{ name: 'voice-type', desc: 'Push-to-talk local voice transcription - hold Right Ctrl, speak, release to paste', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/voice-type/icons/sound.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/voice-type' },
 		];
 
 		const toolsHtml = tools.map(t => `
@@ -58,9 +58,7 @@ export default {
         h1 {
             font-size: 3rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #58a6ff, #3fb950);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #58a6ff;
         }
         .subtitle {
             font-size: 1.2rem;
@@ -122,7 +120,7 @@ export default {
     </style>
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/mikecann/mikerosoft/main/website/hero.png" alt="mikerosoft.app hero" class="hero" />
+    <img src="https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/website/hero.png" alt="mikerosoft.app hero" class="hero" />
     <div class="header">
         <h1>mikerosoft.app</h1>
         <p class="subtitle">A collection of personalised tools for Windows users.<br/>
