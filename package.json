@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "wrangler": "^3.0.0"
+  },
+  "dependencies": {
+    "famfamfam-silk": "^1.0.0"
   }
 }
