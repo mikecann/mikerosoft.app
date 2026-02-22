@@ -120,10 +120,10 @@ export default {
     </style>
 </head>
 <body>
-    <img src="https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/website/hero.png" alt="mikerosoft.app hero" class="hero" />
+    <img src="https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/website/hero.png?v=2" alt="mikerosoft.app hero" class="hero" />
     <div class="header">
         <h1>Mikerosoft</h1>
-        <p class="subtitle">A collection of personalised tools for <a href="https://mikecann.blog" target="_blank" rel="noopener">Mike Cann</a>.<br/>
+        <p class="subtitle">A collection of personalised windows tools for <a href="https://mikecann.blog" target="_blank" rel="noopener">Mike Cann</a>.<br/>
         <span style="font-size: 0.85em; color: #6e7681;">(and is in no way affiliated with Microsoft... please don't sue me!)</span><br/><br/>
         <a href="https://github.com/mikecann/mikerosoft" target="_blank" rel="noopener">View the repository on GitHub</a></p>
     </div>
