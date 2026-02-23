@@ -1,27 +1,42 @@
 export default {
 	async fetch(request, env, ctx) {
 		const tools = [
-			{ name: 'transcribe', desc: 'Extract audio from a video and transcribe it via faster-whisper (CUDA with CPU fallback); right-click any video file in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/transcribe/icons/film.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/transcribe/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/transcribe' },
-			{ name: 'vid2md', desc: 'Convert a YouTube URL to a markdown image-link and copy it to clipboard; right-click any .url Internet Shortcut in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/vid2md/icons/page_white_link.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/vid2md/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/vid2md' },
-			{ name: 'removebg', desc: 'Remove the background from an image using rembg / birefnet-portrait; right-click any image file in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/removebg/icons/picture.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/removebg/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/removebg' },
-			{ name: 'ghopen', desc: 'Open the current repo on GitHub; opens the PR page if on a PR branch; right-click any folder in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ghopen/icons/world_go.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ghopen/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/ghopen' },
-			{ name: 'ctxmenu', desc: 'Manage Explorer context menu entries - toggle shell verbs and COM handlers on/off without admin rights', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ctxmenu/icons/application_form.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ctxmenu/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/ctxmenu' },
-			{ name: 'backup-phone', desc: 'Back up an iPhone over MTP (USB) to a flat folder on disk', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/backup-phone/icons/phone.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/backup-phone/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/backup-phone' },
-			{ name: 'scale-monitor4', desc: 'Toggle Monitor 4 between 200% (normal) and 300% (filming) scaling', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/scale-monitor4/icons/monitor.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/scale-monitor4/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/scale-monitor4' },
-			{ name: 'taskmon', desc: 'Real-time NET/CPU/GPU/MEM sparklines overlaid on the taskbar', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/taskmon/icons/chart_bar.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/taskmon/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/taskmon' },
-			{ name: 'voice-type', desc: 'Push-to-talk local voice transcription - hold Right Ctrl, speak, release to paste', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/voice-type/icons/sound.png', screenshot: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/voice-type/docs/ss1.png', url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/voice-type' },
+			{ name: 'transcribe', desc: 'Extract audio from a video and transcribe it via faster-whisper (CUDA with CPU fallback); right-click any video file in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/transcribe/icons/film.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/transcribe/docs/ss1.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/transcribe' },
+			{ name: 'vid2md', desc: 'Convert a YouTube URL to a markdown image-link and copy it to clipboard; right-click any .url Internet Shortcut in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/vid2md/icons/page_white_link.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/vid2md/docs/ss1.png', 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/vid2md/docs/ss2.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/vid2md' },
+			{ name: 'removebg', desc: 'Remove the background from an image using rembg / birefnet-portrait; right-click any image file in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/removebg/icons/picture.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/removebg/docs/ss1.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/removebg' },
+			{ name: 'ghopen', desc: 'Open the current repo on GitHub; opens the PR page if on a PR branch; right-click any folder in Explorer', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ghopen/icons/world_go.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ghopen/docs/ss1.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/ghopen' },
+			{ name: 'ctxmenu', desc: 'Manage Explorer context menu entries - toggle shell verbs and COM handlers on/off without admin rights', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ctxmenu/icons/application_form.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/ctxmenu/docs/ss1.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/ctxmenu' },
+			{ name: 'backup-phone', desc: 'Back up an iPhone over MTP (USB) to a flat folder on disk', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/backup-phone/icons/phone.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/backup-phone/docs/ss1.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/backup-phone' },
+			{ name: 'scale-monitor4', desc: 'Toggle Monitor 4 between 200% (normal) and 300% (filming) scaling', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/scale-monitor4/icons/monitor.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/scale-monitor4/docs/ss1.png', 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/scale-monitor4/docs/ss2.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/scale-monitor4' },
+			{ name: 'taskmon', desc: 'Real-time NET/CPU/GPU/MEM sparklines overlaid on the taskbar', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/taskmon/icons/chart_bar.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/taskmon/docs/ss1.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/taskmon' },
+			{ name: 'voice-type', desc: 'Push-to-talk local voice transcription - hold Right Ctrl, speak, release to paste', icon: 'https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/voice-type/icons/sound.png', screenshots: ['https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/tools/voice-type/docs/ss1.png'], url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/voice-type' },
 		];
 
-		const toolsHtml = tools.map(t => `
+		const toolsHtml = tools.map(t => {
+            let screenshotsHtml = '';
+            if (t.screenshots && t.screenshots.length > 0) {
+                if (t.screenshots.length === 1) {
+                    screenshotsHtml = `<img src="${t.screenshots[0]}" alt="${t.name} screenshot" class="tool-screenshot" />`;
+                } else {
+                    const len = t.screenshots.length;
+                    const imgs = t.screenshots.map((src, i) => {
+                        return `<img src="${src}" alt="${t.name} screenshot" class="tool-screenshot carousel-img" style="animation: carousel-${len} ${len * 4}s infinite; animation-delay: ${i * 4}s;" />`;
+                    }).join('');
+                    screenshotsHtml = `<div class="carousel-container">${imgs}</div>`;
+                }
+            }
+
+            return `
             <div class="tool-card">
-                ${t.screenshot ? `<img src="${t.screenshot}" alt="${t.name} screenshot" class="tool-screenshot" />` : ''}
+                ${screenshotsHtml}
                 <div class="tool-header">
                     <img src="${t.icon}" alt="${t.name} icon" class="tool-icon" />
                     <h2><a href="${t.url}" target="_blank" rel="noopener">${t.name}</a></h2>
                 </div>
                 <p>${t.desc}</p>
             </div>
-        `).join('');
+            `;
+        }).join('');
 
 		const html = `
 <!DOCTYPE html>
@@ -99,6 +114,25 @@ export default {
             border-radius: 4px;
             margin-bottom: 1rem;
             border: 1px solid #30363d;
+        }
+        .carousel-container {
+            display: grid;
+            margin-bottom: 1rem;
+        }
+        .carousel-img {
+            grid-area: 1 / 1;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+        @keyframes carousel-2 {
+            0%, 45% { opacity: 1; }
+            55%, 95% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes carousel-3 {
+            0%, 28% { opacity: 1; }
+            38%, 90% { opacity: 0; }
+            100% { opacity: 1; }
         }
         .tool-header {
             display: flex;
