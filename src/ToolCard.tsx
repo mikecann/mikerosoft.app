@@ -29,7 +29,17 @@ export function ToolCard({ tool }: { tool: Tool }) {
 
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder style={{ display: 'flex', flexDirection: 'column' }}>
-      {hasScreenshot && (
+      {tool.header ? (
+        <Card.Section>
+          <Image
+            src={tool.header}
+            alt={`${tool.name} header`}
+            height={180}
+            fit="cover"
+            style={{ objectPosition: 'center' }}
+          />
+        </Card.Section>
+      ) : hasScreenshot && (
         <ScreenshotSection screenshots={tool.screenshots} name={tool.name} />
       )}
 

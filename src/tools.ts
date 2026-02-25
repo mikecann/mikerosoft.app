@@ -2,6 +2,7 @@ export interface Tool {
   name: string;
   desc: string;
   icon: string;
+  header?: string;
   screenshots: string[];
   url: string;
 }
@@ -13,6 +14,7 @@ export const tools: Tool[] = [
     name: 'transcribe',
     desc: 'Extract audio from a video and transcribe it via faster-whisper (CUDA with CPU fallback); right-click any video file in Explorer',
     icon: `${base}/transcribe/icons/film.png`,
+    header: `${base}/transcribe/docs/header.png`,
     screenshots: [`${base}/transcribe/docs/ss1.png`],
     url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/transcribe',
   },
