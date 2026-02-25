@@ -43,7 +43,7 @@ export function ToolCard({ tool }: { tool: Tool }) {
         <ScreenshotSection screenshots={tool.screenshots} name={tool.name} />
       )}
 
-      <Group mt={hasScreenshot ? 'md' : 0} mb="xs" gap="sm" wrap="nowrap">
+      <Group mt={tool.header || hasScreenshot ? 'md' : 0} mb="xs" gap="sm" wrap="nowrap">
         <ThemeIcon variant="light" color="blue" size={36} radius="md">
           <img
             src={tool.icon}
