@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Anchor, Badge, Card, Group, Image, Text } from '@mantine/core';
+import { Anchor, Button, Card, Group, Image, Text, ThemeIcon } from '@mantine/core';
 import type { Tool } from './tools';
 
 function ScreenshotSection({ screenshots, name }: { screenshots: string[]; name: string }) {
@@ -33,34 +33,39 @@ export function ToolCard({ tool }: { tool: Tool }) {
         <ScreenshotSection screenshots={tool.screenshots} name={tool.name} />
       )}
 
-      <Group mt={hasScreenshot ? 'md' : undefined} mb="xs" gap="xs" align="center">
-        <img
-          src={tool.icon}
-          alt=""
-          width={16}
-          height={16}
-          style={{ imageRendering: 'pixelated', flexShrink: 0 }}
-        />
-        <Anchor
-          href={tool.url}
-          target="_blank"
-          rel="noopener"
-          fw={600}
-          size="lg"
-          c="blue"
-        >
+      <Group mt={hasScreenshot ? 'md' : 0} mb="xs" gap="sm" wrap="nowrap">
+        <ThemeIcon variant="light" color="blue" size={36} radius="md">
+          <img
+            src={tool.icon}
+            alt=""
+            width={16}
+            height={16}
+            style={{ imageRendering: 'pixelated', display: 'block' }}
+          />
+        </ThemeIcon>
+        <Text fw={700} size="md">
           {tool.name}
-        </Anchor>
-        {tool.screenshots.length > 1 && (
-          <Badge size="xs" variant="light" color="gray" ml="auto">
-            {tool.screenshots.length} screenshots
-          </Badge>
-        )}
+        </Text>
       </Group>
 
       <Text size="sm" c="dimmed" lh={1.6} style={{ flex: 1 }}>
         {tool.desc}
       </Text>
+
+      <Button
+        component={Anchor}
+        href={tool.url}
+        target="_blank"
+        rel="noopener"
+        variant="light"
+        color="blue"
+        fullWidth
+        mt="md"
+        radius="md"
+        size="sm"
+      >
+        View source
+      </Button>
     </Card>
   );
 }
