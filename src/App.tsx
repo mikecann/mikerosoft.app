@@ -31,7 +31,7 @@ export default function App() {
         <Container size={1800} py="xl" px="xl">
           <Stack align="center" mb="xl" gap="md">
             <Image
-              src="https://cdn.jsdelivr.net/gh/mikecann/mikerosoft@main/website/logo.png"
+              src="/logo.png"
               alt="Mikerosoft logo"
               maw={300}
               w="100%"
