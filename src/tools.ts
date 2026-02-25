@@ -112,6 +112,7 @@ export const tools: Tool[] = [
     name: 'copypath',
     desc: 'Copy the absolute path of a file or folder to the clipboard from the terminal; defaults to the current directory if no argument given',
     icon: `${base}/copypath/icons/page_copy.png`,
+    header: `${base}/copypath/docs/header.png`,
     screenshots: [`${base}/copypath/docs/ss1.png`],
     url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/copypath',
   },
