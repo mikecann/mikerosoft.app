@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Anchor, Button, Card, Group, Image, Text, ThemeIcon } from '@mantine/core';
+import { Button, Card, Group, Image, Text, ThemeIcon } from '@mantine/core';
 import type { Tool } from './tools';
 
 function ScreenshotSection({ screenshots, name }: { screenshots: string[]; name: string }) {
@@ -63,7 +63,7 @@ export function ToolCard({ tool }: { tool: Tool }) {
       </Text>
 
       <Button
-        component={Anchor}
+        component="a"
         href={tool.url}
         target="_blank"
         rel="noopener"
