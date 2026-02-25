@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name=mikerosoft-website"
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@mantine/core": "^7.17.0",
