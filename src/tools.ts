@@ -199,6 +199,15 @@ export const tools: Tool[] = [
     platforms: ['windows'],
   },
   {
+    name: 'video-gen',
+    desc: 'Chat-style AI video generation using OpenRouter video models; right-click any folder in Explorer to open; model-aware settings, reference images, first/last frames, save or drag generated MP4s into the folder (requires OpenRouter API key)',
+    icon: `${base}/video-gen/icons/video-gen.png`,
+    header: `${base}/video-gen/docs/header.png`,
+    screenshots: [],
+    url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/video-gen',
+    platforms: ['windows'],
+  },
+  {
     name: 'face-swap',
     desc: 'Swap a face from one image into another locally using InsightFace; right-click any image to pre-load the target, or launch it from Windows Search',
     icon: `${base}/face-swap/icons/face-swap.png`,
