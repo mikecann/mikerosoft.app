@@ -61,6 +61,15 @@ export const tools: Tool[] = [
     platforms: ['windows'],
   },
   {
+    name: 'remove-portrait',
+    desc: 'Remove the background from a talking-head video and save a transparent MOV for Resolve; right-click any video file in Explorer',
+    icon: `${base}/remove-portrait/icons/film.png`,
+    header: `${base}/remove-portrait/docs/header.png`,
+    screenshots: [`${base}/remove-portrait/docs/ss1.png`],
+    url: 'https://github.com/mikecann/mikerosoft/tree/main/tools/remove-portrait',
+    platforms: ['windows'],
+  },
+  {
     name: 'img-upscale',
     desc: 'Upscale an image locally with a quality-first transformer backend; right-click any image file in Explorer, choose 2x, 4x, 8x, or 16x, and keep the original file format',
     icon: `${base}/img-upscale/icons/picture.png`,
