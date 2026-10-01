@@ -160,7 +160,7 @@ export const tools: Tool[] = [
     desc: 'Extract every video stream from an OBS/Aitum multi-track recording into separate editor-friendly files; right-click any video file in Explorer',
     icon: '/icons/unmultitrack.png',
     header: asset('unmultitrack', 'docs/header.webp'),
-    screenshots: [],
+    screenshots: [asset('unmultitrack', 'docs/split.png')],
     url: repoUrl('unmultitrack'),
     category: 'Video & recording',
     platforms: ['windows'],
