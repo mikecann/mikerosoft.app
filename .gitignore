@@ -5,3 +5,6 @@ public/changelog
 scripts/icons/sheet-*.png
 scripts/icons/check.jpg
 .repo-cache
+src/toolDates.generated.ts
+.env
+.DS_Store

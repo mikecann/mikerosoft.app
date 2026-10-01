@@ -40,7 +40,7 @@ import {
 import { DateTimeContent, MessageDialog, PowerScreen, RunDialog, TurnOffDialog, type PowerChoice } from './XpDialogs';
 import { XpWindow } from './XpWindow';
 
-const REPO_URL = 'https://github.com/mikecann/mikerosoft';
+const REPO_URL = 'https://github.com/mikecann/mikerosoft.app';
 const TASKBAR_HEIGHT = 36;
 // Tools down the left edge of the desktop. The rest go down the right.
 const LEFT_CATEGORIES: readonly Category[] = ['Video & recording', 'Images'];

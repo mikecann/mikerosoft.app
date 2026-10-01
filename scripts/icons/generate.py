@@ -4,7 +4,7 @@ Each sheet draws 9 of SUBJECTS against the famfamfam-style reference in
 style-ref.png, on flat magenta so slice.py can cut them out. Drawing 9 at once
 keeps the family consistent. For a new tool, add it to SUBJECTS and draw just
 its sheet. Needs OPENROUTER_API_KEY in the environment or the repo root .env. Sheets are ignored
-by git; only the cut-out icons in website/public/icons are kept.
+by git; only the cut-out icons in public/icons are kept.
 
 usage: python3 generate.py <sheet-index...>
 """
@@ -14,7 +14,7 @@ from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 KEY = os.environ.get('OPENROUTER_API_KEY') or next(
     l.split('=', 1)[1].strip().strip('"\'')
-    for l in open(os.path.join(HERE, '..', '..', '..', '.env'))
+    for l in open(os.path.join(HERE, '..', '..', '.env'))
     if l.startswith('OPENROUTER_API_KEY=')
 )
 MODEL = 'google/gemini-3-pro-image-preview'
@@ -97,7 +97,7 @@ def generate(sheet: int) -> str:
     }
     req = urllib.request.Request('https://openrouter.ai/api/v1/chat/completions', json.dumps(body).encode(), {
         'Authorization': f'Bearer {KEY}', 'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://github.com/mikecann/mikerosoft', 'X-Title': 'mikerosoft/website-icons',
+        'HTTP-Referer': 'https://github.com/mikecann/mikerosoft.app', 'X-Title': 'mikerosoft.app/icons',
     })
     data = json.load(urllib.request.urlopen(req, timeout=300))
     images = data['choices'][0]['message'].get('images') or []

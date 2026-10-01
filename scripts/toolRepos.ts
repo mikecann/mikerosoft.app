@@ -1,6 +1,6 @@
 // Every tool lives in its own repo at github.com/mikecann/<name>. The dates
 // and changelog on the site come from those repos' histories, so the build
-// keeps a blob-less mirror of each one in website/.repo-cache (git-ignored):
+// keeps a blob-less mirror of each one in .repo-cache (git-ignored):
 // full commit history and file lists, without the file contents.
 
 import { execFile } from 'node:child_process';

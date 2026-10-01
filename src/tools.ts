@@ -36,7 +36,7 @@ export const CATEGORY_ICON: Record<Category, string> = {
 export interface Tool {
   name: string;
   desc: string;
-  /** A Mikerosoft 95 icon in website/public/icons. */
+  /** A Mikerosoft 95 icon in public/icons. */
   icon: string;
   header?: string;
   screenshots: string[];
