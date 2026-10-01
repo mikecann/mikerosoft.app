@@ -360,10 +360,9 @@ export const tools: Tool[] = [
     desc: 'Teleprompter for the Elgato Prompter: paste notes or Notion bullets, step through them line by line or auto-scroll, mirror for beam-splitter glass, and drive it with a clicker from any app',
     icon: '/icons/telemprompit.png',
     header: asset('telemprompit', 'docs/header.png'),
-    screenshots: [
-      asset('telemprompit', 'docs/ss1.png'),
-      asset('telemprompit', 'docs/ss2.png'),
-    ],
+    video: asset('telemprompit', 'docs/demo.mp4'),
+    screenshots: [asset('telemprompit', 'docs/stepping.png'), asset('telemprompit', 'docs/ss1.png'),
+      asset('telemprompit', 'docs/ss2.png'),],
     url: repoUrl('telemprompit'),
     category: 'Video & recording',
     platforms: ['macos'],
