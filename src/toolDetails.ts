@@ -100,6 +100,14 @@ export const toolDetails: Record<string, ToolDetails> = {
       "The background is see-through so it looks like part of the taskbar, and it stays on top even when you click around. Right-click it if you want to change anything.",
     ],
   },
+  "time-it": {
+    tagline: "Start a timer from your Mac's menu bar, even when you're offline",
+    intro: [
+      "I wanted to replace Clockify with a little time tracker I could make my own. This sits in the menu bar so I can start and stop work quickly. Mine defaults to Convex, and I can choose other categories in the app.",
+      "It saves on the Mac first, so starting and stopping doesn't need an internet connection. A running timer survives quitting the app or putting the Mac to sleep, and pending changes sync to my Convex backend when I'm online again.",
+      "The reports show time over time, a category breakdown, weekday averages and a daily activity grid. You can filter by date and category, edit old sessions, and bring over completed Clockify sessions with the importer.",
+    ],
+  },
   taskbar: {
     tagline: "A Windows-style taskbar for your Mac, one on every monitor",
     intro: [

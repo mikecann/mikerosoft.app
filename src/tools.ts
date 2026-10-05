@@ -252,6 +252,16 @@ export const tools: Tool[] = [
     platforms: ['windows'],
   },
   {
+    name: 'time-it',
+    desc: 'Offline time tracking for macOS with a menu bar timer, categories, reports and automatic Convex sync; my Clockify replacement',
+    icon: '/icons/time-it.png',
+    header: asset('time-it', 'docs/header.webp'),
+    screenshots: [asset('time-it', 'docs/screenshot.png')],
+    url: repoUrl('time-it'),
+    category: 'Desktop',
+    platforms: ['macos'],
+  },
+  {
     name: 'taskbar',
     desc: 'Windows-style taskbar for macOS: one bar per monitor, pinned apps, widgets including a one-button Elgato lights toggle, and window avoidance',
     icon: '/icons/taskbar.png',

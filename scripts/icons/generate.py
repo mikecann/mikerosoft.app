@@ -70,6 +70,8 @@ SUBJECTS = [
     ('ui-calendar', 'a desk calendar page with a red top binding and a date number'),
     ('ui-changes', 'a notepad page with lines of text and a small blue clock in the corner'),
     ('ui-get', 'an open brown cardboard box with a big green arrow pointing down into it'),
+    # sheet 5: new tools
+    ('time-it', 'a chunky golden amber stopwatch with a pale face, dark hands and a small green play triangle'),
 ]
 
 PROMPT = """Make a 3x3 grid of 9 separate desktop application icons for a Windows 98 styled website.
