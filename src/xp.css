@@ -613,27 +613,13 @@ button.plain.context-menu-item:disabled {
   line-height: 1.4;
 }
 
-.use-badge {
-  display: inline-block;
-  margin-left: 6px;
-  padding: 1px 6px;
-  border: 1px solid #e3c35c;
-  border-radius: 8px;
-  background: #fff6d5;
-  color: #7a5a00;
-  font: 400 10px/1.3 var(--ui);
-  vertical-align: 1px;
-}
-
 /* Shelved tools are greyed a little, like a disabled Start menu entry. */
-.directory-shelved .directory-item img,
-.folder-items .directory-item img {
+.shelved-group .directory-item img {
   filter: grayscale(0.7);
   opacity: 0.75;
 }
 
-.directory-shelved .directory-item:hover img,
-.folder-items .directory-item:hover img {
+.shelved-group .directory-item:hover img {
   filter: none;
   opacity: 1;
 }
@@ -666,9 +652,22 @@ button.plain.context-menu-item:disabled {
   margin: 0 0 8px;
 }
 
-.folder-items {
+.folder-items .directory-grid {
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  padding-top: 0;
+}
+
+/* Group headings, like Explorer's Show in Groups: blue text over a fading line. */
+.doc .shelved-group h3 {
+  margin: 18px 2px 0;
+  padding-bottom: 3px;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(90deg, #7a96df, transparent) 1;
+  color: var(--pane-head);
+  font: 700 12px/1.3 var(--ui);
+}
+
+.folder-items .shelved-group:first-child h3 {
+  margin-top: 0;
 }
 
 /* ---------- Tool ---------- */
@@ -1314,6 +1313,11 @@ button.plain.all-programs {
 .cascade-menu .start-item img {
   width: 22px;
   height: 22px;
+}
+
+/* A folder of folders is short, and its own cascades would be clipped if it scrolled. */
+.cascade-menu[data-folders] {
+  overflow: visible;
 }
 
 .start-foot {

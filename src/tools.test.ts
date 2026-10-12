@@ -9,7 +9,7 @@ import {
   PLATFORM_ICON,
   formerNames,
   searchTools,
-  sortByUse,
+  SHELVED_ICON,
   splitShelved,
   tools,
   USE_ORDER,
@@ -46,7 +46,7 @@ const fixtures: Tool[] = [
     url: '',
     platforms: ['windows', 'macos'],
     category: 'Desktop',
-    use: 'sometimes',
+    use: 'daily',
   },
 ];
 
@@ -135,16 +135,6 @@ test('every tool says how much I use it, and every kind of use has tools', () =>
   }
 });
 
-test('the tools I use every day come first and shelved ones last, otherwise keeping their order', () => {
-  const [shelved, daily, sometimes] = fixtures;
-  const anotherDaily = { ...daily, name: 'another-daily' };
-
-  assert.deepEqual(
-    sortByUse([shelved, daily, sometimes, anotherDaily]).map(tool => tool.name),
-    ['mac-only', 'another-daily', 'cross-platform', 'windows-only'],
-  );
-});
-
 test('shelved tools split off from the ones I still use, keeping their order', () => {
   const { inUse, shelved } = splitShelved(fixtures);
 
@@ -170,8 +160,8 @@ test('every tool has its own unique Mikerosoft 95 icon', () => {
   }
 });
 
-test('every category and platform has an icon', () => {
-  for (const icon of [...Object.values(CATEGORY_ICON), ...Object.values(PLATFORM_ICON)]) {
+test('every category, platform and the Shelved folder has an icon', () => {
+  for (const icon of [...Object.values(CATEGORY_ICON), ...Object.values(PLATFORM_ICON), SHELVED_ICON]) {
     assert.ok(existsSync(new URL(`../public${icon}`, import.meta.url)), `${icon} is missing`);
   }
   assert.deepEqual(Object.keys(CATEGORY_ICON).sort(), [...CATEGORY_ORDER].sort());

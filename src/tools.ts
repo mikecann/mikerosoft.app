@@ -33,16 +33,17 @@ export const CATEGORY_ICON: Record<Category, string> = {
   Developer: '/icons/ui-developer.png',
 };
 
-/** How much I actually use a tool these days. */
-export type Use = 'daily' | 'sometimes' | 'shelved';
+/** Whether I still use a tool every day, or I've shelved it. */
+export type Use = 'daily' | 'shelved';
 
-export const USE_ORDER: readonly Use[] = ['daily', 'sometimes', 'shelved'];
+export const USE_ORDER: readonly Use[] = ['daily', 'shelved'];
 
 export const USE_LABEL: Record<Use, string> = {
   daily: 'I use it every day',
-  sometimes: 'I use it now and then',
   shelved: 'Shelved',
 };
+
+export const SHELVED_ICON = '/xp/folder.png';
 
 export interface Tool {
   name: string;
@@ -56,7 +57,7 @@ export interface Tool {
   url: string;
   platforms: readonly PlatformId[];
   category: Category;
-  /** Every day ones go down the left of the desktop, shelved ones in the Shelved folder. */
+  /** Every day ones go on the desktop, shelved ones in the Shelved folder. */
   use: Use;
 }
 
@@ -72,11 +73,6 @@ export function groupToolsByCategory(toolList: readonly Tool[]): { category: Cat
   return CATEGORY_ORDER
     .map(category => ({ category, tools: toolList.filter(tool => tool.category === category) }))
     .filter(group => group.tools.length > 0);
-}
-
-/** The tools I use every day first and shelved ones last, otherwise in the order given. */
-export function sortByUse(toolList: readonly Tool[]): Tool[] {
-  return [...toolList].sort((a, b) => USE_ORDER.indexOf(a.use) - USE_ORDER.indexOf(b.use));
 }
 
 /** Splits off the tools I've shelved from the ones I still use. */
@@ -148,7 +144,7 @@ export const tools: Tool[] = [
     url: repoUrl('transcribe'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'youtube-to-markdown',
@@ -162,7 +158,7 @@ export const tools: Tool[] = [
     url: repoUrl('youtube-to-markdown'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'cutout',
@@ -173,7 +169,7 @@ export const tools: Tool[] = [
     url: repoUrl('cutout'),
     category: 'Images',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'video-cutout',
@@ -206,7 +202,7 @@ export const tools: Tool[] = [
     url: repoUrl('img-upscale'),
     category: 'Images',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'ghopen',
@@ -218,7 +214,7 @@ export const tools: Tool[] = [
     url: repoUrl('ghopen'),
     category: 'Developer',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'right-click-tidy',
@@ -325,7 +321,7 @@ export const tools: Tool[] = [
     url: repoUrl('last-window-quits'),
     category: 'Desktop',
     platforms: ['macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'mikey-mouse',
@@ -351,7 +347,7 @@ export const tools: Tool[] = [
     url: repoUrl('record-it'),
     category: 'Video & recording',
     platforms: ['macos'],
-    use: 'sometimes',
+    use: 'daily',
   },
   {
     name: 'phonebooth',
@@ -363,7 +359,7 @@ export const tools: Tool[] = [
     url: repoUrl('phonebooth'),
     category: 'Desktop',
     platforms: ['macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'token-stats',
@@ -414,7 +410,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-hq'),
     category: 'Video & recording',
     platforms: ['macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'telemprompit',
@@ -427,7 +423,7 @@ export const tools: Tool[] = [
     url: repoUrl('telemprompit'),
     category: 'Video & recording',
     platforms: ['macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'tandem',
@@ -460,7 +456,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-titles'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'img-remix',
@@ -471,7 +467,7 @@ export const tools: Tool[] = [
     url: repoUrl('img-remix'),
     category: 'Images',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'svg-to-png',
@@ -482,7 +478,7 @@ export const tools: Tool[] = [
     url: repoUrl('svg-to-png'),
     category: 'Images',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'img-to-svg',
@@ -493,7 +489,7 @@ export const tools: Tool[] = [
     url: repoUrl('img-to-svg'),
     category: 'Images',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'video-description',
@@ -504,7 +500,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-description'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'copypath',
@@ -516,7 +512,7 @@ export const tools: Tool[] = [
     url: repoUrl('copypath'),
     category: 'Developer',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'worktree-tidy',
@@ -528,7 +524,7 @@ export const tools: Tool[] = [
     url: repoUrl('worktree-tidy'),
     category: 'Developer',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'img-gen',
@@ -540,7 +536,7 @@ export const tools: Tool[] = [
     url: repoUrl('img-gen'),
     category: 'Images',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'video-gen',
@@ -552,7 +548,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-gen'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
   {
     name: 'face-swap',
@@ -575,6 +571,6 @@ export const tools: Tool[] = [
     url: repoUrl('snap-it'),
     category: 'Images',
     platforms: ['macos'],
-    use: 'sometimes',
+    use: 'shelved',
   },
 ];

@@ -12,23 +12,14 @@ import {
 
 const grid = { cols: 10, rows: 4 };
 
-test('the default layout fills columns down the left, and the rest down the right', () => {
-  const layout = defaultLayout(['a', 'b', 'c', 'd', 'e'], ['x', 'y'], grid);
+test('the default layout fills columns down the left, with corner icons bottom right like the Recycle Bin', () => {
+  const layout = defaultLayout(['a', 'b', 'c', 'd', 'e'], ['bin', 'bin2'], grid);
 
   assert.deepEqual(layout.a, { col: 0, row: 0 });
   assert.deepEqual(layout.d, { col: 0, row: 3 });
   assert.deepEqual(layout.e, { col: 1, row: 0 });
-  assert.deepEqual(layout.x, { col: 9, row: 0 });
-  assert.deepEqual(layout.y, { col: 9, row: 1 });
-});
-
-test('corner icons sit bottom right, like the Recycle Bin, and the right edge fills around them', () => {
-  const layout = defaultLayout(['a'], ['w', 'x', 'y', 'z'], grid, ['bin']);
-
   assert.deepEqual(layout.bin, { col: 9, row: 3 });
-  assert.deepEqual(layout.w, { col: 9, row: 0 });
-  assert.deepEqual(layout.y, { col: 9, row: 2 });
-  assert.deepEqual(layout.z, { col: 8, row: 0 }, 'the right edge skips the corner and starts its next column');
+  assert.deepEqual(layout.bin2, { col: 9, row: 2 });
 });
 
 test('moving icons keeps their shape and snaps to the grid', () => {

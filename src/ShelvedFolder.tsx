@@ -1,9 +1,5 @@
-import { Link } from './router';
-import { toolDetails } from './toolDetails';
-import { toolPath } from './toolPages';
-import type { Tool } from './tools';
-
-export const SHELVED_ICON = '/xp/folder.png';
+import { ShelvedGroups } from './HomeContent';
+import { SHELVED_ICON, type Tool } from './tools';
 
 /** The Shelved folder on the desktop: an Explorer window of the tools I don't really use any more. */
 export function ShelvedFolder({ tools }: { tools: Tool[] }) {
@@ -16,22 +12,14 @@ export function ShelvedFolder({ tools }: { tools: Tool[] }) {
         </h2>
         <div className="task-pane-body">
           <p>
-            These are the ones I've kind of shelved. Most are Windows tools from before I moved to a Mac, so I don't
-            really use them any more.
+            These are the ones I've kind of shelved. Some are Windows tools from before I moved to a Mac, and the rest
+            I just don't use any more.
           </p>
           <p>They should still work tho, they just don't get many updates.</p>
         </div>
       </aside>
-      <div className="directory-grid folder-items">
-        {tools.map(tool => (
-          <Link key={tool.name} href={toolPath(tool.name)} className="directory-item">
-            <img src={tool.icon} alt="" />
-            <span>
-              <strong>{tool.name}</strong>
-              <small>{toolDetails[tool.name]?.tagline ?? tool.desc}</small>
-            </span>
-          </Link>
-        ))}
+      <div className="folder-items">
+        <ShelvedGroups tools={tools} />
       </div>
     </div>
   );

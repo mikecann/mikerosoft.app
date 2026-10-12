@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Desktop, type DesktopItem } from './Desktop';
 import { categoryId, HOME_SEARCH_ID, HomeContent, type PlatformFilter } from './HomeContent';
 import { navigate, replacePath, useNavigation } from './router';
-import { SHELVED_ICON, ShelvedFolder } from './ShelvedFolder';
+import { ShelvedFolder } from './ShelvedFolder';
 import { Taskbar } from './Taskbar';
 import { ToolContent } from './ToolContent';
 import { toolPath } from './toolPages';
@@ -14,7 +14,7 @@ import {
   PLATFORM_ORDER,
   RENAMED_TOOLS,
   searchTools,
-  sortByUse,
+  SHELVED_ICON,
   splitShelved,
   tools,
   type Category,
@@ -48,7 +48,7 @@ const TASKBAR_HEIGHT = 36;
 const RECENT_KEY = 'mikerosoft:recent-tools';
 const RECENT_COUNT = 6;
 // What the Start menu shows before you've opened anything.
-const DEFAULT_RECENT = ['tandem', 'voice-type', 'taskbar', 'meeting-archive', 'time-it', 'record-it'];
+const DEFAULT_RECENT = ['tandem', 'record-it', 'voice-type', 'taskbar', 'meeting-archive', 'time-it'];
 
 type Dialog = 'help' | 'log-off' | 'turn-off' | 'not-found' | 'run' | null;
 
@@ -105,8 +105,7 @@ const { inUse, shelved } = splitShelved(groupToolsByCategory(tools).flatMap(grou
 const desktopItems: DesktopItem[] = [
   { id: 'home', label: 'Mikerosoft', icon: '/logo.png', href: '/' },
   { id: 'github', label: 'GitHub', icon: '/xp/github.png', href: REPO_URL, external: true },
-  // Phones show them in this order, so the every day ones come first.
-  ...sortByUse(inUse).map(tool => ({
+  ...inUse.map(tool => ({
     id: tool.name,
     label: tool.name,
     icon: tool.icon,
@@ -115,9 +114,8 @@ const desktopItems: DesktopItem[] = [
   })),
   { id: 'shelved', label: 'Shelved', icon: SHELVED_ICON },
 ];
-// The ones I use every day go down the left edge, the rest down the right, and shelved ones live in a folder.
-const leftIds = ['home', 'github', ...inUse.filter(tool => tool.use === 'daily').map(tool => tool.name)];
-const rightIds = inUse.filter(tool => tool.use !== 'daily').map(tool => tool.name);
+// The ones I use every day go down the left edge, and the shelved ones live in a folder in the corner.
+const leftIds = ['home', 'github', ...inUse.map(tool => tool.name)];
 const cornerIds = ['shelved'];
 
 export default function App() {
@@ -216,8 +214,11 @@ export default function App() {
   function showCategory(category: Category) {
     setQuery('');
     open('home');
-    // Wait for the window to render before scrolling to the category.
-    setTimeout(() => document.getElementById(categoryId(category))?.scrollIntoView({ behavior: 'smooth' }), 50);
+    // Wait for the window to render before scrolling to the category, or its shelved tools if it's all shelved.
+    setTimeout(() => {
+      const section = document.getElementById(categoryId(category)) ?? document.getElementById(categoryId(`shelved ${category}`));
+      section?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
   }
 
   function search() {
@@ -281,7 +282,6 @@ export default function App() {
       <Desktop
         items={desktopItems}
         leftIds={leftIds}
-        rightIds={rightIds}
         cornerIds={cornerIds}
         area={area}
         isSmallScreen={isSmallScreen}
@@ -383,8 +383,8 @@ export default function App() {
             one to open it, hit Copy prompt, and let your AI agent do the setup.
           </p>
           <p>
-            They're also sorted into {CATEGORY_ORDER.length} folders in Start, All Programs. The ones I don't really use
-            any more are in the Shelved folder.
+            They're also in Start, All Programs. The ones I don't really use any more are in the Shelved folder, sorted
+            into the same {CATEGORY_ORDER.length} groups.
           </p>
           <p className="muted">Not affiliated with Microsoft in any way. Please don't sue me!</p>
         </MessageDialog>

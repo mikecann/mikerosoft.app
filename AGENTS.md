@@ -70,7 +70,7 @@ writes `dist/tools/<old>.html` that previews the tool and redirects.
 
 - The site is a Windows XP desktop, in the style of Mike's Convex OS
   (github.com/mikecann/convex-os), built on XP.css plus `src/xp.css`.
-  Every tool in use is a desktop icon down the left and right edges, and each one
+  Every tool in use is a desktop icon down the left edge, and each one
   opens in its own window that can be dragged, resized, minimised and
   closed. The window in front sets the address bar, so `/tools/<name>` opens
   that tool's window over the Mikerosoft one. The window logic lives in
@@ -104,17 +104,17 @@ writes `dist/tools/<old>.html` that previews the tool and redirects.
   famfamfam-style drawings made with `scripts/icons/generate.py` and
   `slice.py`. For a new tool, add it to `SUBJECTS` there and draw its sheet so
   it matches the family. Tests fail if a tool has no category or icon.
-- Each tool also says how much Mike actually uses it, as `use`: `daily`,
-  `sometimes` or `shelved`. Every day tools go down the left edge of the
-  desktop and come first in each section of the Mikerosoft window, with an
-  "every day" badge. Now and then ones go down the right edge. Shelved ones
-  (mostly the Windows tools from before he moved to a Mac) aren't loose on the
-  desktop: they live in the Shelved folder in the bottom right, where XP keeps
-  the Recycle Bin (an `app:shelved` window), in a Shelved section at the
-  bottom of the Mikerosoft window, and in Start, All Programs, Shelved. Their
-  pages say they're shelved. Ask Mike before moving a tool between them.
-  Changing the default desktop arrangement means bumping `STORAGE_KEY` in
-  `src/Desktop.tsx`, or anyone with a saved layout never sees it.
+- Each tool also says whether Mike still uses it, as `use`: `daily` or
+  `shelved`. Every day tools go down the left edge of the desktop and fill
+  the Mikerosoft window's sections. Shelved ones (the Windows tools from
+  before he moved to a Mac, and the rest he just doesn't use any more) aren't
+  loose on the desktop: they live in the Shelved folder in the bottom right,
+  where XP keeps the Recycle Bin (an `app:shelved` window), in a Shelved
+  section at the bottom of the Mikerosoft window grouped by category, and in
+  Start, All Programs, Shelved. Their pages say they're shelved. Ask Mike
+  before moving a tool between them. Changing the default desktop
+  arrangement means bumping `STORAGE_KEY` in `src/Desktop.tsx`, or anyone
+  with a saved layout never sees it.
 - Give every tool repo a `docs/header.webp` (1376x768). It's used as the
   share image until one's been taken, and as the tool page's artwork when
   there are no real screenshots yet. jsDelivr caches `@main` files for up to

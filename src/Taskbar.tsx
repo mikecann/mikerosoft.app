@@ -4,8 +4,16 @@ import { Link } from './router';
 import { formatToolDate } from './toolDates';
 import { TOOL_DATES } from './toolDates.generated';
 import { toolPath } from './toolPages';
-import { SHELVED_ICON } from './ShelvedFolder';
-import { CATEGORY_ICON, CATEGORY_ORDER, groupToolsByCategory, splitShelved, tools, type Category, type Tool } from './tools';
+import {
+  CATEGORY_ICON,
+  CATEGORY_ORDER,
+  groupToolsByCategory,
+  SHELVED_ICON,
+  splitShelved,
+  tools,
+  type Category,
+  type Tool,
+} from './tools';
 
 export interface TaskbarItem {
   id: string;
@@ -47,24 +55,43 @@ export function useNow(every: 'second' | 'minute' = 'minute'): Date {
 function moveFocus(event: KeyboardEvent<HTMLElement>) {
   if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
   event.preventDefault();
+  // The innermost menu handles it, so a folder inside a folder doesn't move twice.
+  event.stopPropagation();
   const items = [...event.currentTarget.querySelectorAll<HTMLElement>('.start-item')];
   const index = items.indexOf(document.activeElement as HTMLElement);
   const next = event.key === 'ArrowDown' ? index + 1 : index - 1;
   items[(next + items.length) % items.length]?.focus();
 }
 
+interface ProgramFolder {
+  name: string;
+  icon: string;
+  folders: ProgramFolder[];
+  tools: Tool[];
+}
+
+function categoryFolders(toolList: readonly Tool[]): ProgramFolder[] {
+  return groupToolsByCategory(toolList).map(group => ({
+    name: group.category,
+    icon: CATEGORY_ICON[group.category],
+    folders: [],
+    tools: group.tools,
+  }));
+}
+
 const { inUse, shelved } = splitShelved(tools);
-const PROGRAM_FOLDERS: { name: string; icon: string; tools: Tool[] }[] = [
-  ...groupToolsByCategory(inUse).map(group => ({ name: group.category, icon: CATEGORY_ICON[group.category], tools: group.tools })),
-  { name: 'Shelved', icon: SHELVED_ICON, tools: shelved },
+const PROGRAMS: ProgramFolder[] = [
+  ...categoryFolders(inUse),
+  { name: 'Shelved', icon: SHELVED_ICON, folders: categoryFolders(shelved), tools: [] },
 ];
 
-function AllPrograms({ onClose }: { onClose: () => void }) {
+/** A Start menu folder's contents: folders that cascade out to the right, then its tools. */
+function MenuEntries({ folders, tools: folderTools, onClose }: { folders: ProgramFolder[]; tools: Tool[]; onClose: () => void }) {
   const [openFolder, setOpenFolder] = useState<string | null>(null);
 
   return (
-    <div className="all-programs-menu" role="menu" aria-label="All Programs" onKeyDown={moveFocus}>
-      {PROGRAM_FOLDERS.map(folder => (
+    <>
+      {folders.map(folder => (
         <div
           key={folder.name}
           className="cascade"
@@ -84,17 +111,32 @@ function AllPrograms({ onClose }: { onClose: () => void }) {
             <span className="cascade-arrow" aria-hidden="true">▶</span>
           </button>
           {openFolder === folder.name && (
-            <div className="cascade-menu" role="menu" aria-label={folder.name} onKeyDown={moveFocus}>
-              {folder.tools.map(tool => (
-                <Link key={tool.name} href={toolPath(tool.name)} className="start-item" role="menuitem" onClick={onClose}>
-                  <img src={tool.icon} alt="" />
-                  <span>{tool.name}</span>
-                </Link>
-              ))}
+            <div
+              className="cascade-menu"
+              data-folders={folder.folders.length > 0 || undefined}
+              role="menu"
+              aria-label={folder.name}
+              onKeyDown={moveFocus}
+            >
+              <MenuEntries folders={folder.folders} tools={folder.tools} onClose={onClose} />
             </div>
           )}
         </div>
       ))}
+      {folderTools.map(tool => (
+        <Link key={tool.name} href={toolPath(tool.name)} className="start-item" role="menuitem" onClick={onClose}>
+          <img src={tool.icon} alt="" />
+          <span>{tool.name}</span>
+        </Link>
+      ))}
+    </>
+  );
+}
+
+function AllPrograms({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="all-programs-menu" role="menu" aria-label="All Programs" onKeyDown={moveFocus}>
+      <MenuEntries folders={PROGRAMS} tools={[]} onClose={onClose} />
     </div>
   );
 }

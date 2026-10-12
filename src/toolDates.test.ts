@@ -4,7 +4,7 @@ import { formatToolDate, sortTools } from './toolDates.ts';
 import type { Tool } from './tools.ts';
 
 function tool(name: string): Tool {
-  return { name, desc: '', icon: '', screenshots: [], url: '', platforms: ['macos'], category: 'Desktop', use: 'sometimes' };
+  return { name, desc: '', icon: '', screenshots: [], url: '', platforms: ['macos'], category: 'Desktop', use: 'daily' };
 }
 
 const toolList = [tool('old'), tool('undated'), tool('new'), tool('middle')];

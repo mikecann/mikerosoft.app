@@ -4,8 +4,7 @@ import { formatToolDate } from './toolDates';
 import { TOOL_DATES } from './toolDates.generated';
 import { toolDetails } from './toolDetails';
 import { makeItYoursPrompt } from './toolPages';
-import { SHELVED_ICON } from './ShelvedFolder';
-import { CATEGORY_ICON, PLATFORM_ICON, PLATFORM_LABEL, sortPlatforms, USE_LABEL, type Tool } from './tools';
+import { CATEGORY_ICON, PLATFORM_ICON, PLATFORM_LABEL, SHELVED_ICON, sortPlatforms, USE_LABEL, type Tool } from './tools';
 import { ImageViewer } from './XpDialogs';
 
 const CHANGES_SHOWN = 5;
