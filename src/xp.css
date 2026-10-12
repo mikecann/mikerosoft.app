@@ -725,9 +725,10 @@ button.plain.context-menu-item:disabled {
   color: #7a5a00;
 }
 
-.chip-daily span {
+.chip-daily .star {
   color: #e0a800;
   font-size: 13px;
+  font-weight: 400;
 }
 
 /* XP's yellow information bar, for the tools I've shelved. */

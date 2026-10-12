@@ -244,7 +244,7 @@ export function ToolContent({ tool }: { tool: Tool }) {
                   <span key={id}><img src={PLATFORM_ICON[id]} alt="" />{PLATFORM_LABEL[id]}</span>
                 ))}
                 <span><img src={CATEGORY_ICON[tool.category]} alt="" />{tool.category}</span>
-                {tool.use === 'daily' && <span className="chip-daily"><span aria-hidden="true">★</span>{USE_LABEL.daily}</span>}
+                {tool.use === 'daily' && <span className="chip-daily"><b className="star" aria-hidden="true">★</b>{USE_LABEL.daily}</span>}
                 {tool.use === 'shelved' && <span><img src={SHELVED_ICON} alt="" />{USE_LABEL.shelved}</span>}
                 {dates && <span><img src="/icons/ui-calendar.png" alt="" />Updated {formatToolDate(dates.updated)}</span>}
               </p>
