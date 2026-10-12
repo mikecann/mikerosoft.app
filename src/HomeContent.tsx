@@ -1,7 +1,7 @@
 import { Link } from './router';
 import { toolDetails } from './toolDetails';
 import { toolPath } from './toolPages';
-import { CATEGORY_ICON, groupToolsByCategory, type Tool } from './tools';
+import { CATEGORY_ICON, groupToolsByCategory, SHELVED_ICON, splitShelved, type Tool } from './tools';
 
 export type PlatformFilter = 'all' | 'windows' | 'macos';
 
@@ -9,6 +9,41 @@ export const HOME_SEARCH_ID = 'home-search';
 
 export function categoryId(category: string): string {
   return `category-${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+}
+
+function DirectoryItem({ tool }: { tool: Tool }) {
+  return (
+    <Link href={toolPath(tool.name)} className="directory-item">
+      <img src={tool.icon} alt="" />
+      <span>
+        <strong>{tool.name}</strong>
+        <small>{toolDetails[tool.name]?.tagline ?? tool.desc}</small>
+      </span>
+    </Link>
+  );
+}
+
+/**
+ * Shelved tools under small category headings, like Explorer's Show in Groups
+ * view. Only the Mikerosoft window's copy has ids, for Start to scroll to.
+ */
+export function ShelvedGroups({ tools, withIds = false }: { tools: Tool[]; withIds?: boolean }) {
+  return (
+    <>
+      {groupToolsByCategory(tools).map(group => (
+        <div
+          key={group.category}
+          className="shelved-group"
+          id={withIds ? categoryId(`shelved ${group.category}`) : undefined}
+        >
+          <h3>{group.category}</h3>
+          <div className="directory-grid">
+            {group.tools.map(tool => <DirectoryItem key={tool.name} tool={tool} />)}
+          </div>
+        </div>
+      ))}
+    </>
+  );
 }
 
 /** The Mikerosoft window: what this is, then every tool, grouped. */
@@ -29,6 +64,8 @@ export function HomeContent({
   onPlatformChange: (platform: PlatformFilter) => void;
   onSurprise: () => void;
 }) {
+  const { inUse, shelved } = splitShelved(tools);
+
   return (
     <>
       <div className="xp-toolbar">
@@ -69,6 +106,7 @@ export function HomeContent({
                 them so far. Open any one to see what it does, and if you like it, it comes with a prompt you can
                 paste into your AI coding agent to copy it over and make it your own.
               </p>
+              <p>The ones I use every day are up the top, and the ones I've kind of shelved are down the bottom.</p>
             </div>
           </header>
         )}
@@ -77,7 +115,7 @@ export function HomeContent({
           <p className="empty">Nothing matches that. Try another word, or set Runs on back to both.</p>
         )}
 
-        {groupToolsByCategory(tools).map(group => (
+        {groupToolsByCategory(inUse).map(group => (
           <section key={group.category} className="directory" id={categoryId(group.category)} aria-label={group.category}>
             <h2 className="task-pane-head">
               <img src={CATEGORY_ICON[group.category]} alt="" />
@@ -85,18 +123,25 @@ export function HomeContent({
               <span className="count">{group.tools.length} tools</span>
             </h2>
             <div className="directory-grid">
-              {group.tools.map(tool => (
-                <Link key={tool.name} href={toolPath(tool.name)} className="directory-item">
-                  <img src={tool.icon} alt="" />
-                  <span>
-                    <strong>{tool.name}</strong>
-                    <small>{toolDetails[tool.name]?.tagline ?? tool.desc}</small>
-                  </span>
-                </Link>
-              ))}
+              {group.tools.map(tool => <DirectoryItem key={tool.name} tool={tool} />)}
             </div>
           </section>
         ))}
+
+        {shelved.length > 0 && (
+          <section className="directory" id={categoryId('Shelved')} aria-label="Shelved">
+            <h2 className="task-pane-head">
+              <img src={SHELVED_ICON} alt="" />
+              Shelved
+              <span className="count">{shelved.length} tools</span>
+            </h2>
+            <p className="directory-note">
+              Some are Windows ones from before I moved to a Mac, and the rest I just don't use any more. They should
+              still work tho, they just don't get many updates.
+            </p>
+            <ShelvedGroups tools={shelved} withIds />
+          </section>
+        )}
       </div>
     </>
   );

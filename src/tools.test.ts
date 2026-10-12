@@ -9,7 +9,10 @@ import {
   PLATFORM_ICON,
   formerNames,
   searchTools,
+  SHELVED_ICON,
+  splitShelved,
   tools,
+  USE_ORDER,
   type PlatformId,
   type Tool,
 } from './tools.ts';
@@ -23,6 +26,7 @@ const fixtures: Tool[] = [
     url: '',
     platforms: ['windows'],
     category: 'Desktop',
+    use: 'shelved',
   },
   {
     name: 'mac-only',
@@ -32,6 +36,7 @@ const fixtures: Tool[] = [
     url: '',
     platforms: ['macos'],
     category: 'Desktop',
+    use: 'daily',
   },
   {
     name: 'cross-platform',
@@ -41,6 +46,7 @@ const fixtures: Tool[] = [
     url: '',
     platforms: ['windows', 'macos'],
     category: 'Desktop',
+    use: 'daily',
   },
 ];
 
@@ -120,6 +126,22 @@ test('groups tools by category in category order, keeping their order within eac
   assert.equal(groups.flatMap(group => group.tools).length, tools.length);
 });
 
+test('every tool says how much I use it, and every kind of use has tools', () => {
+  for (const tool of tools) {
+    assert.ok(USE_ORDER.includes(tool.use), `${tool.name} doesn't say how much I use it`);
+  }
+  for (const use of USE_ORDER) {
+    assert.ok(tools.some(tool => tool.use === use), `nothing is ${use}`);
+  }
+});
+
+test('shelved tools split off from the ones I still use, keeping their order', () => {
+  const { inUse, shelved } = splitShelved(fixtures);
+
+  assert.deepEqual(inUse.map(tool => tool.name), ['mac-only', 'cross-platform']);
+  assert.deepEqual(shelved.map(tool => tool.name), ['windows-only']);
+});
+
 test('search matches every word against names, descriptions and categories, names first', () => {
   assert.deepEqual(searchTools(tools, 'RECORD-IT').map(tool => tool.name), ['record-it', 'tandem']);
   assert.ok(searchTools(tools, 'elgato prompter').some(tool => tool.name === 'telemprompit'));
@@ -138,8 +160,8 @@ test('every tool has its own unique Mikerosoft 95 icon', () => {
   }
 });
 
-test('every category and platform has an icon', () => {
-  for (const icon of [...Object.values(CATEGORY_ICON), ...Object.values(PLATFORM_ICON)]) {
+test('every category, platform and the Shelved folder has an icon', () => {
+  for (const icon of [...Object.values(CATEGORY_ICON), ...Object.values(PLATFORM_ICON), SHELVED_ICON]) {
     assert.ok(existsSync(new URL(`../public${icon}`, import.meta.url)), `${icon} is missing`);
   }
   assert.deepEqual(Object.keys(CATEGORY_ICON).sort(), [...CATEGORY_ORDER].sort());

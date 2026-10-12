@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Desktop, type DesktopItem } from './Desktop';
 import { categoryId, HOME_SEARCH_ID, HomeContent, type PlatformFilter } from './HomeContent';
 import { navigate, replacePath, useNavigation } from './router';
+import { ShelvedFolder } from './ShelvedFolder';
 import { Taskbar } from './Taskbar';
 import { ToolContent } from './ToolContent';
 import { toolPath } from './toolPages';
@@ -13,6 +14,8 @@ import {
   PLATFORM_ORDER,
   RENAMED_TOOLS,
   searchTools,
+  SHELVED_ICON,
+  splitShelved,
   tools,
   type Category,
   type Tool,
@@ -42,20 +45,21 @@ import { XpWindow } from './XpWindow';
 
 const REPO_URL = 'https://github.com/mikecann/mikerosoft.app';
 const TASKBAR_HEIGHT = 36;
-// Tools down the left edge of the desktop. The rest go down the right.
-const LEFT_CATEGORIES: readonly Category[] = ['Video & recording', 'Images'];
 const RECENT_KEY = 'mikerosoft:recent-tools';
 const RECENT_COUNT = 6;
 // What the Start menu shows before you've opened anything.
-const DEFAULT_RECENT = ['tandem', 'record-it', 'voice-type', 'taskbar', 'task-stats', 'telemprompit'];
+const DEFAULT_RECENT = ['tandem', 'record-it', 'voice-type', 'taskbar', 'meeting-archive', 'time-it'];
 
 type Dialog = 'help' | 'log-off' | 'turn-off' | 'not-found' | 'run' | null;
 
 const DATE_TIME: WindowId = 'app:datetime';
+const SHELVED: WindowId = 'app:shelved';
 
 function geometryFor(id: WindowId, openCount: number) {
   const area = desktopArea();
-  return id === DATE_TIME ? dialogGeometry(area, { width: 500, height: 470 }) : defaultGeometry(area, openCount);
+  if (id === DATE_TIME) return dialogGeometry(area, { width: 500, height: 470 });
+  if (id === SHELVED) return dialogGeometry(area, { width: 820, height: 560 });
+  return defaultGeometry(area, openCount);
 }
 
 function desktopArea() {
@@ -97,20 +101,22 @@ function useArea() {
   return area;
 }
 
-const grouped = groupToolsByCategory(tools);
+const { inUse, shelved } = splitShelved(groupToolsByCategory(tools).flatMap(group => group.tools));
 const desktopItems: DesktopItem[] = [
   { id: 'home', label: 'Mikerosoft', icon: '/logo.png', href: '/' },
   { id: 'github', label: 'GitHub', icon: '/xp/github.png', href: REPO_URL, external: true },
-  ...grouped.flatMap(group => group.tools).map(tool => ({
+  ...inUse.map(tool => ({
     id: tool.name,
     label: tool.name,
     icon: tool.icon,
     href: toolPath(tool.name),
     sourceUrl: tool.url,
   })),
+  { id: 'shelved', label: 'Shelved', icon: SHELVED_ICON },
 ];
-const leftIds = ['home', 'github', ...grouped.filter(g => LEFT_CATEGORIES.includes(g.category)).flatMap(g => g.tools.map(t => t.name))];
-const rightIds = grouped.filter(g => !LEFT_CATEGORIES.includes(g.category)).flatMap(g => g.tools.map(t => t.name));
+// The ones I use every day go down the left edge, and the shelved ones live in a folder in the corner.
+const leftIds = ['home', 'github', ...inUse.map(tool => tool.name)];
+const cornerIds = ['shelved'];
 
 export default function App() {
   const area = useArea();
@@ -132,6 +138,7 @@ export default function App() {
     const tool = toolFor(id);
     if (tool) return { title: `${tool.name} - Mikerosoft`, taskTitle: tool.name, icon: tool.icon };
     if (id === DATE_TIME) return { title: 'Date and Time Properties', taskTitle: 'Date and Time Properties', icon: '/icons/ui-calendar.png' };
+    if (id === SHELVED) return { title: 'Shelved', taskTitle: 'Shelved', icon: SHELVED_ICON };
     return { title: 'Mikerosoft', taskTitle: 'Mikerosoft', icon: '/logo.png' };
   }
 
@@ -207,8 +214,11 @@ export default function App() {
   function showCategory(category: Category) {
     setQuery('');
     open('home');
-    // Wait for the window to render before scrolling to the category.
-    setTimeout(() => document.getElementById(categoryId(category))?.scrollIntoView({ behavior: 'smooth' }), 50);
+    // Wait for the window to render before scrolling to the category, or its shelved tools if it's all shelved.
+    setTimeout(() => {
+      const section = document.getElementById(categoryId(category)) ?? document.getElementById(categoryId(`shelved ${category}`));
+      section?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
   }
 
   function search() {
@@ -229,7 +239,8 @@ export default function App() {
   }
 
   function openDesktopItem(item: DesktopItem, inNewTab?: boolean) {
-    if (item.external || inNewTab) window.open(item.href, '_blank', 'noopener');
+    if (!item.href) open(SHELVED);
+    else if (item.external || inNewTab) window.open(item.href, '_blank', 'noopener');
     else navigate(item.href);
   }
 
@@ -271,7 +282,7 @@ export default function App() {
       <Desktop
         items={desktopItems}
         leftIds={leftIds}
-        rightIds={rightIds}
+        cornerIds={cornerIds}
         area={area}
         isSmallScreen={isSmallScreen}
         onOpen={openDesktopItem}
@@ -294,7 +305,9 @@ export default function App() {
             isFocused={state.id === focused?.id}
             isSmallScreen={isSmallScreen}
             area={area}
-            statusBar={isPage && (
+            statusBar={state.id === SHELVED ? (
+              <p className="status-bar-field">{shelved.length} objects</p>
+            ) : isPage && (
               <>
                 <p className="status-bar-field">{tool ? tool.desc : `${visibleTools.length} of ${tools.length} tools`}</p>
                 {tool && (
@@ -314,6 +327,8 @@ export default function App() {
               <ToolContent tool={tool} />
             ) : state.id === DATE_TIME ? (
               <DateTimeContent onClose={() => windowActions.onClose(DATE_TIME)} />
+            ) : state.id === SHELVED ? (
+              <ShelvedFolder tools={shelved} />
             ) : (
               <HomeContent
                 tools={visibleTools}
@@ -350,6 +365,7 @@ export default function App() {
         onOpenHome={() => navigate('/')}
         onOpenGithub={openGithub}
         onShowCategory={showCategory}
+        onOpenShelved={() => open(SHELVED)}
         onSearch={search}
         onSurprise={surprise}
         onRun={() => setDialog('run')}
@@ -366,7 +382,10 @@ export default function App() {
             These are the little desktop tools I (Mike Cann) have built for myself on Windows and macOS. Double-click
             one to open it, hit Copy prompt, and let your AI agent do the setup.
           </p>
-          <p>They're also sorted into {CATEGORY_ORDER.length} folders in Start, All Programs.</p>
+          <p>
+            They're also in Start, All Programs. The ones I don't really use any more are in the Shelved folder, sorted
+            into the same {CATEGORY_ORDER.length} groups.
+          </p>
           <p className="muted">Not affiliated with Microsoft in any way. Please don't sue me!</p>
         </MessageDialog>
       )}

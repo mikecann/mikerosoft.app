@@ -15,7 +15,8 @@ export interface DesktopItem {
   id: string;
   label: string;
   icon: string;
-  href: string;
+  /** Folders have no address of their own. */
+  href?: string;
   external?: boolean;
   /** Where the source lives, for the right-click menu. */
   sourceUrl?: string;
@@ -24,7 +25,8 @@ export interface DesktopItem {
 const CELL = { width: 90, height: 92 };
 const PADDING = 8;
 const DRAG_THRESHOLD = 4;
-const STORAGE_KEY = 'mikerosoft:desktop-layout';
+// v2 when the desktop was rearranged by how much I use each tool, so everyone sees it once.
+const STORAGE_KEY = 'mikerosoft:desktop-layout-v2';
 
 const ARROWS: Record<string, Direction> = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
 
@@ -55,7 +57,7 @@ function saveLayout(layout: Layout) {
 export function Desktop({
   items,
   leftIds,
-  rightIds,
+  cornerIds,
   area,
   isSmallScreen,
   onOpen,
@@ -64,7 +66,8 @@ export function Desktop({
 }: {
   items: DesktopItem[];
   leftIds: string[];
-  rightIds: string[];
+  /** Bottom right, where XP keeps the Recycle Bin. */
+  cornerIds: string[];
   area: { width: number; height: number };
   isSmallScreen: boolean;
   onOpen: (item: DesktopItem, inNewTab?: boolean) => void;
@@ -78,7 +81,7 @@ export function Desktop({
   };
   const [stored, setStored] = useState<Layout>(() => {
     const saved = readSavedLayout();
-    const defaults = defaultLayout(leftIds, rightIds, grid);
+    const defaults = defaultLayout(leftIds, cornerIds, grid);
     // Saved spots win, and any tool added since gets its default spot or the nearest free one.
     const known = Object.fromEntries(Object.entries(saved).filter(([id]) => id in defaults));
     return { ...known, ...Object.fromEntries(Object.entries(defaults).filter(([id]) => !(id in known))) };
@@ -186,7 +189,7 @@ export function Desktop({
       y: event.clientY,
       items: [
         { label: 'Arrange Icons by Name', onSelect: () => arrange([...items].sort((a, b) => a.label.localeCompare(b.label)).map(item => item.id)) },
-        { label: 'Arrange Icons by Type', onSelect: () => commit(defaultLayout(leftIds, rightIds, grid)) },
+        { label: 'Arrange Icons by Type', onSelect: () => commit(defaultLayout(leftIds, cornerIds, grid)) },
         { kind: 'separator' },
         {
           label: 'Refresh',
@@ -211,7 +214,7 @@ export function Desktop({
       y: event.clientY,
       items: [
         { label: 'Open', bold: true, onSelect: () => onOpen(item) },
-        ...(!item.external ? [{ label: 'Open in New Tab', onSelect: () => onOpen(item, true) }] : []),
+        ...(item.href && !item.external ? [{ label: 'Open in New Tab', onSelect: () => onOpen(item, true) }] : []),
         ...(item.sourceUrl ? [{ kind: 'separator' as const }, { label: 'View Source', onSelect: () => window.open(item.sourceUrl, '_blank', 'noopener') }] : []),
         { kind: 'separator' },
         { label: 'Properties', onSelect: onProperties },

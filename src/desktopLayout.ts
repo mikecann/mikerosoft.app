@@ -41,12 +41,12 @@ export function arrangeInColumns(ids: readonly string[], grid: Grid): Layout {
   return Object.fromEntries(ids.map((id, i) => [id, { col: Math.floor(i / rows), row: i % rows }]));
 }
 
-/** The first set of icons go down the left edge, the second down the right. */
-export function defaultLayout(left: readonly string[], right: readonly string[], grid: Grid): Layout {
+/** Icons go down the left edge, and corner ones sit bottom right, where XP keeps the Recycle Bin. */
+export function defaultLayout(left: readonly string[], corner: readonly string[], grid: Grid): Layout {
   const layout = arrangeInColumns(left, grid);
   const rows = Math.max(grid.rows, 1);
-  right.forEach((id, i) => {
-    layout[id] = { col: Math.max(grid.cols - 1 - Math.floor(i / rows), 0), row: i % rows };
+  corner.forEach((id, i) => {
+    layout[id] = { col: Math.max(grid.cols - 1, 0), row: Math.max(rows - 1 - i, 0) };
   });
   return fitLayout(layout, grid);
 }

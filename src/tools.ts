@@ -33,6 +33,18 @@ export const CATEGORY_ICON: Record<Category, string> = {
   Developer: '/icons/ui-developer.png',
 };
 
+/** Whether I still use a tool every day, or I've shelved it. */
+export type Use = 'daily' | 'shelved';
+
+export const USE_ORDER: readonly Use[] = ['daily', 'shelved'];
+
+export const USE_LABEL: Record<Use, string> = {
+  daily: 'I use it every day',
+  shelved: 'Shelved',
+};
+
+export const SHELVED_ICON = '/xp/folder.png';
+
 export interface Tool {
   name: string;
   desc: string;
@@ -45,6 +57,8 @@ export interface Tool {
   url: string;
   platforms: readonly PlatformId[];
   category: Category;
+  /** Every day ones go on the desktop, shelved ones in the Shelved folder. */
+  use: Use;
 }
 
 export function filterToolsByPlatforms(
@@ -59,6 +73,14 @@ export function groupToolsByCategory(toolList: readonly Tool[]): { category: Cat
   return CATEGORY_ORDER
     .map(category => ({ category, tools: toolList.filter(tool => tool.category === category) }))
     .filter(group => group.tools.length > 0);
+}
+
+/** Splits off the tools I've shelved from the ones I still use. */
+export function splitShelved(toolList: readonly Tool[]): { inUse: Tool[]; shelved: Tool[] } {
+  return {
+    inUse: toolList.filter(tool => tool.use !== 'shelved'),
+    shelved: toolList.filter(tool => tool.use === 'shelved'),
+  };
 }
 
 /**
@@ -122,6 +144,7 @@ export const tools: Tool[] = [
     url: repoUrl('transcribe'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'youtube-to-markdown',
@@ -135,6 +158,7 @@ export const tools: Tool[] = [
     url: repoUrl('youtube-to-markdown'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'cutout',
@@ -145,6 +169,7 @@ export const tools: Tool[] = [
     url: repoUrl('cutout'),
     category: 'Images',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'video-cutout',
@@ -155,6 +180,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-cutout'),
     category: 'Video & recording',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'unmultitrack',
@@ -165,6 +191,7 @@ export const tools: Tool[] = [
     url: repoUrl('unmultitrack'),
     category: 'Video & recording',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'img-upscale',
@@ -175,6 +202,7 @@ export const tools: Tool[] = [
     url: repoUrl('img-upscale'),
     category: 'Images',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'ghopen',
@@ -186,6 +214,7 @@ export const tools: Tool[] = [
     url: repoUrl('ghopen'),
     category: 'Developer',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'right-click-tidy',
@@ -196,6 +225,7 @@ export const tools: Tool[] = [
     url: repoUrl('right-click-tidy'),
     category: 'Desktop',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'color-picker',
@@ -206,6 +236,7 @@ export const tools: Tool[] = [
     url: repoUrl('color-picker'),
     category: 'Images',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'backup-phone',
@@ -216,6 +247,7 @@ export const tools: Tool[] = [
     url: repoUrl('backup-phone'),
     category: 'Desktop',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'scale-monitor',
@@ -229,6 +261,7 @@ export const tools: Tool[] = [
     url: repoUrl('scale-monitor'),
     category: 'Desktop',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'sleep-monitors',
@@ -239,6 +272,7 @@ export const tools: Tool[] = [
     url: repoUrl('sleep-monitors'),
     category: 'Desktop',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'task-stats',
@@ -250,6 +284,7 @@ export const tools: Tool[] = [
     url: repoUrl('task-stats'),
     category: 'Desktop',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'time-it',
@@ -260,6 +295,7 @@ export const tools: Tool[] = [
     url: repoUrl('time-it'),
     category: 'Desktop',
     platforms: ['macos'],
+    use: 'daily',
   },
   {
     name: 'taskbar',
@@ -273,6 +309,7 @@ export const tools: Tool[] = [
     url: repoUrl('taskbar'),
     category: 'Desktop',
     platforms: ['macos'],
+    use: 'daily',
   },
   {
     name: 'last-window-quits',
@@ -284,6 +321,7 @@ export const tools: Tool[] = [
     url: repoUrl('last-window-quits'),
     category: 'Desktop',
     platforms: ['macos'],
+    use: 'shelved',
   },
   {
     name: 'mikey-mouse',
@@ -295,6 +333,7 @@ export const tools: Tool[] = [
     url: repoUrl('mikey-mouse'),
     category: 'Desktop',
     platforms: ['macos'],
+    use: 'daily',
   },
   {
     name: 'record-it',
@@ -308,6 +347,7 @@ export const tools: Tool[] = [
     url: repoUrl('record-it'),
     category: 'Video & recording',
     platforms: ['macos'],
+    use: 'daily',
   },
   {
     name: 'phonebooth',
@@ -319,6 +359,7 @@ export const tools: Tool[] = [
     url: repoUrl('phonebooth'),
     category: 'Desktop',
     platforms: ['macos'],
+    use: 'shelved',
   },
   {
     name: 'token-stats',
@@ -329,6 +370,7 @@ export const tools: Tool[] = [
     url: repoUrl('token-stats'),
     category: 'Developer',
     platforms: ['macos'],
+    use: 'shelved',
   },
   {
     name: 'record-meeting',
@@ -342,6 +384,7 @@ export const tools: Tool[] = [
     url: repoUrl('record-meeting'),
     category: 'Video & recording',
     platforms: ['macos'],
+    use: 'shelved',
   },
   {
     name: 'meeting-archive',
@@ -352,6 +395,7 @@ export const tools: Tool[] = [
     url: repoUrl('meeting-archive'),
     category: 'Video & recording',
     platforms: ['macos'],
+    use: 'daily',
   },
   {
     name: 'video-hq',
@@ -366,6 +410,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-hq'),
     category: 'Video & recording',
     platforms: ['macos'],
+    use: 'shelved',
   },
   {
     name: 'telemprompit',
@@ -378,6 +423,7 @@ export const tools: Tool[] = [
     url: repoUrl('telemprompit'),
     category: 'Video & recording',
     platforms: ['macos'],
+    use: 'shelved',
   },
   {
     name: 'tandem',
@@ -388,6 +434,7 @@ export const tools: Tool[] = [
     url: repoUrl('tandem'),
     category: 'Video & recording',
     platforms: ['macos'],
+    use: 'daily',
   },
   {
     name: 'voice-type',
@@ -398,6 +445,7 @@ export const tools: Tool[] = [
     url: repoUrl('voice-type'),
     category: 'Desktop',
     platforms: ['windows', 'macos'],
+    use: 'daily',
   },
   {
     name: 'video-titles',
@@ -408,6 +456,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-titles'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'img-remix',
@@ -418,6 +467,7 @@ export const tools: Tool[] = [
     url: repoUrl('img-remix'),
     category: 'Images',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'svg-to-png',
@@ -428,6 +478,7 @@ export const tools: Tool[] = [
     url: repoUrl('svg-to-png'),
     category: 'Images',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'img-to-svg',
@@ -438,6 +489,7 @@ export const tools: Tool[] = [
     url: repoUrl('img-to-svg'),
     category: 'Images',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'video-description',
@@ -448,6 +500,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-description'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'copypath',
@@ -459,6 +512,7 @@ export const tools: Tool[] = [
     url: repoUrl('copypath'),
     category: 'Developer',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'worktree-tidy',
@@ -470,6 +524,7 @@ export const tools: Tool[] = [
     url: repoUrl('worktree-tidy'),
     category: 'Developer',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'img-gen',
@@ -481,6 +536,7 @@ export const tools: Tool[] = [
     url: repoUrl('img-gen'),
     category: 'Images',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'video-gen',
@@ -492,6 +548,7 @@ export const tools: Tool[] = [
     url: repoUrl('video-gen'),
     category: 'Video & recording',
     platforms: ['windows', 'macos'],
+    use: 'shelved',
   },
   {
     name: 'face-swap',
@@ -502,6 +559,7 @@ export const tools: Tool[] = [
     url: repoUrl('face-swap'),
     category: 'Images',
     platforms: ['windows'],
+    use: 'shelved',
   },
   {
     name: 'snap-it',
@@ -513,5 +571,6 @@ export const tools: Tool[] = [
     url: repoUrl('snap-it'),
     category: 'Images',
     platforms: ['macos'],
+    use: 'shelved',
   },
 ];
