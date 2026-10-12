@@ -41,12 +41,31 @@ export function arrangeInColumns(ids: readonly string[], grid: Grid): Layout {
   return Object.fromEntries(ids.map((id, i) => [id, { col: Math.floor(i / rows), row: i % rows }]));
 }
 
-/** The first set of icons go down the left edge, the second down the right. */
-export function defaultLayout(left: readonly string[], right: readonly string[], grid: Grid): Layout {
+/**
+ * The first set of icons go down the left edge, the second down the right, and
+ * any corner ones sit in the bottom right corner, where XP keeps the Recycle Bin.
+ */
+export function defaultLayout(
+  left: readonly string[],
+  right: readonly string[],
+  grid: Grid,
+  corner: readonly string[] = [],
+): Layout {
   const layout = arrangeInColumns(left, grid);
   const rows = Math.max(grid.rows, 1);
+  const lastCol = Math.max(grid.cols - 1, 0);
+  const cornerCells = new Set<string>();
+  corner.forEach((id, i) => {
+    layout[id] = { col: lastCol, row: Math.max(rows - 1 - i, 0) };
+    cornerCells.add(key(layout[id]));
+  });
+  // Right edge cells, skipping the corner. Icons that spill off a full desktop get sorted out by fitLayout.
+  const slots = Array.from({ length: right.length + corner.length }, (_, i) => ({
+    col: Math.max(lastCol - Math.floor(i / rows), 0),
+    row: i % rows,
+  })).filter(cell => !cornerCells.has(key(cell)));
   right.forEach((id, i) => {
-    layout[id] = { col: Math.max(grid.cols - 1 - Math.floor(i / rows), 0), row: i % rows };
+    layout[id] = slots[i];
   });
   return fitLayout(layout, grid);
 }

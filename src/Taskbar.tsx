@@ -4,7 +4,8 @@ import { Link } from './router';
 import { formatToolDate } from './toolDates';
 import { TOOL_DATES } from './toolDates.generated';
 import { toolPath } from './toolPages';
-import { CATEGORY_ICON, CATEGORY_ORDER, groupToolsByCategory, tools, type Category, type Tool } from './tools';
+import { SHELVED_ICON } from './ShelvedFolder';
+import { CATEGORY_ICON, CATEGORY_ORDER, groupToolsByCategory, splitShelved, tools, type Category, type Tool } from './tools';
 
 export interface TaskbarItem {
   id: string;
@@ -52,33 +53,39 @@ function moveFocus(event: KeyboardEvent<HTMLElement>) {
   items[(next + items.length) % items.length]?.focus();
 }
 
+const { inUse, shelved } = splitShelved(tools);
+const PROGRAM_FOLDERS: { name: string; icon: string; tools: Tool[] }[] = [
+  ...groupToolsByCategory(inUse).map(group => ({ name: group.category, icon: CATEGORY_ICON[group.category], tools: group.tools })),
+  { name: 'Shelved', icon: SHELVED_ICON, tools: shelved },
+];
+
 function AllPrograms({ onClose }: { onClose: () => void }) {
-  const [openCategory, setOpenCategory] = useState<Category | null>(null);
+  const [openFolder, setOpenFolder] = useState<string | null>(null);
 
   return (
     <div className="all-programs-menu" role="menu" aria-label="All Programs" onKeyDown={moveFocus}>
-      {groupToolsByCategory(tools).map(group => (
+      {PROGRAM_FOLDERS.map(folder => (
         <div
-          key={group.category}
+          key={folder.name}
           className="cascade"
-          onPointerEnter={() => setOpenCategory(group.category)}
+          onPointerEnter={() => setOpenFolder(folder.name)}
         >
           <button
             type="button"
             className="plain start-item cascade-item"
             role="menuitem"
             aria-haspopup="menu"
-            aria-expanded={openCategory === group.category}
-            onClick={() => setOpenCategory(group.category)}
-            onFocus={() => setOpenCategory(group.category)}
+            aria-expanded={openFolder === folder.name}
+            onClick={() => setOpenFolder(folder.name)}
+            onFocus={() => setOpenFolder(folder.name)}
           >
-            <img src={CATEGORY_ICON[group.category]} alt="" />
-            <span>{group.category}</span>
+            <img src={folder.icon} alt="" />
+            <span>{folder.name}</span>
             <span className="cascade-arrow" aria-hidden="true">▶</span>
           </button>
-          {openCategory === group.category && (
-            <div className="cascade-menu" role="menu" aria-label={group.category} onKeyDown={moveFocus}>
-              {group.tools.map(tool => (
+          {openFolder === folder.name && (
+            <div className="cascade-menu" role="menu" aria-label={folder.name} onKeyDown={moveFocus}>
+              {folder.tools.map(tool => (
                 <Link key={tool.name} href={toolPath(tool.name)} className="start-item" role="menuitem" onClick={onClose}>
                   <img src={tool.icon} alt="" />
                   <span>{tool.name}</span>
@@ -98,6 +105,7 @@ function StartMenu({
   onOpenHome,
   onOpenGithub,
   onShowCategory,
+  onOpenShelved,
   onSearch,
   onSurprise,
   onRun,
@@ -110,6 +118,7 @@ function StartMenu({
   onOpenHome: () => void;
   onOpenGithub: () => void;
   onShowCategory: (category: Category) => void;
+  onOpenShelved: () => void;
   onSearch: () => void;
   onSurprise: () => void;
   onRun: () => void;
@@ -203,6 +212,10 @@ function StartMenu({
               <span>{category}</span>
             </button>
           ))}
+          <button type="button" className="plain start-item" onClick={then(onOpenShelved)}>
+            <img src={SHELVED_ICON} alt="" />
+            <span>Shelved</span>
+          </button>
           <hr />
           <button type="button" className="plain start-item" onClick={then(onSurprise)}>
             <img src="/icons/ui-get.png" alt="" />
@@ -332,6 +345,7 @@ export function Taskbar({
   onOpenHome,
   onOpenGithub,
   onShowCategory,
+  onOpenShelved,
   onSearch,
   onSurprise,
   onRun,
@@ -349,6 +363,7 @@ export function Taskbar({
   onOpenHome: () => void;
   onOpenGithub: () => void;
   onShowCategory: (category: Category) => void;
+  onOpenShelved: () => void;
   onSearch: () => void;
   onSurprise: () => void;
   onRun: () => void;
@@ -382,6 +397,7 @@ export function Taskbar({
           onOpenHome={onOpenHome}
           onOpenGithub={onOpenGithub}
           onShowCategory={onShowCategory}
+          onOpenShelved={onOpenShelved}
           onSearch={onSearch}
           onSurprise={onSurprise}
           onRun={onRun}

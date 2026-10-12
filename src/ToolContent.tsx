@@ -4,7 +4,8 @@ import { formatToolDate } from './toolDates';
 import { TOOL_DATES } from './toolDates.generated';
 import { toolDetails } from './toolDetails';
 import { makeItYoursPrompt } from './toolPages';
-import { CATEGORY_ICON, PLATFORM_ICON, PLATFORM_LABEL, sortPlatforms, type Tool } from './tools';
+import { SHELVED_ICON } from './ShelvedFolder';
+import { CATEGORY_ICON, PLATFORM_ICON, PLATFORM_LABEL, sortPlatforms, USE_LABEL, type Tool } from './tools';
 import { ImageViewer } from './XpDialogs';
 
 const CHANGES_SHOWN = 5;
@@ -218,6 +219,13 @@ function Changes({ tool }: { tool: Tool }) {
   );
 }
 
+function shelvedNote(tool: Tool): string {
+  const why = tool.platforms.includes('macos')
+    ? "I don't really use it any more"
+    : "it's Windows only and I'm on a Mac these days, so I don't really use it any more";
+  return `I've kind of shelved this one, ${why}. It should still work tho, it just won't get many updates.`;
+}
+
 /** A tool's window: what it is and how to get it up top, then media, then its history. */
 export function ToolContent({ tool }: { tool: Tool }) {
   const details = toolDetails[tool.name];
@@ -236,10 +244,13 @@ export function ToolContent({ tool }: { tool: Tool }) {
                   <span key={id}><img src={PLATFORM_ICON[id]} alt="" />{PLATFORM_LABEL[id]}</span>
                 ))}
                 <span><img src={CATEGORY_ICON[tool.category]} alt="" />{tool.category}</span>
+                {tool.use === 'daily' && <span className="chip-daily"><span aria-hidden="true">★</span>{USE_LABEL.daily}</span>}
+                {tool.use === 'shelved' && <span><img src={SHELVED_ICON} alt="" />{USE_LABEL.shelved}</span>}
                 {dates && <span><img src="/icons/ui-calendar.png" alt="" />Updated {formatToolDate(dates.updated)}</span>}
               </p>
             </div>
           </header>
+          {tool.use === 'shelved' && <p className="info-bar" role="note">{shelvedNote(tool)}</p>}
           <p className="lead">{details.tagline}</p>
           {details.intro.map((paragraph, i) => <p key={i}><RichText text={paragraph} /></p>)}
         </div>

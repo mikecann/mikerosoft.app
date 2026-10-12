@@ -183,7 +183,7 @@ button.plain.desktop-icon {
   overflow: auto;
 }
 
-.desktop-phone .desktop-icon {
+.desktop-phone button.plain.desktop-icon {
   position: static;
 }
 
@@ -613,6 +613,64 @@ button.plain.context-menu-item:disabled {
   line-height: 1.4;
 }
 
+.use-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid #e3c35c;
+  border-radius: 8px;
+  background: #fff6d5;
+  color: #7a5a00;
+  font: 400 10px/1.3 var(--ui);
+  vertical-align: 1px;
+}
+
+/* Shelved tools are greyed a little, like a disabled Start menu entry. */
+.directory-shelved .directory-item img,
+.folder-items .directory-item img {
+  filter: grayscale(0.7);
+  opacity: 0.75;
+}
+
+.directory-shelved .directory-item:hover img,
+.folder-items .directory-item:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+.doc .directory-note {
+  margin: 10px 2px 0;
+  color: #555;
+  font-size: 12px;
+}
+
+/* ---------- Folder ---------- */
+
+.doc.folder {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.folder-pane {
+  background: var(--pane-body);
+}
+
+.folder-pane .task-pane-body {
+  padding: 12px;
+  font-size: 12px;
+}
+
+.folder-pane .task-pane-body p {
+  margin: 0 0 8px;
+}
+
+.folder-items {
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  padding-top: 0;
+}
+
 /* ---------- Tool ---------- */
 
 .tool-top {
@@ -658,6 +716,28 @@ button.plain.context-menu-item:disabled {
 .chips img {
   width: 18px;
   height: 18px;
+}
+
+.chips .chip-daily {
+  padding-left: 7px;
+  border-color: #e3c35c;
+  background: #fff6d5;
+  color: #7a5a00;
+}
+
+.chip-daily span {
+  color: #e0a800;
+  font-size: 13px;
+}
+
+/* XP's yellow information bar, for the tools I've shelved. */
+.doc .info-bar {
+  margin: 0 0 14px;
+  padding: 7px 10px;
+  border: 1px solid #e3c35c;
+  background: #ffffe1;
+  color: #333;
+  font-size: 12px;
 }
 
 .media {
@@ -798,6 +878,10 @@ button.plain.link {
 
   .home-logo {
     width: 96px;
+  }
+
+  .doc.folder {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .change {

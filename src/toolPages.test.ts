@@ -13,6 +13,7 @@ const fixture: Tool = {
   url: 'https://github.com/mikecann/record-it',
   platforms: ['macos'],
   category: 'Video & recording',
+  use: 'sometimes',
 };
 
 const html = [

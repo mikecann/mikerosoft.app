@@ -22,6 +22,15 @@ test('the default layout fills columns down the left, and the rest down the righ
   assert.deepEqual(layout.y, { col: 9, row: 1 });
 });
 
+test('corner icons sit bottom right, like the Recycle Bin, and the right edge fills around them', () => {
+  const layout = defaultLayout(['a'], ['w', 'x', 'y', 'z'], grid, ['bin']);
+
+  assert.deepEqual(layout.bin, { col: 9, row: 3 });
+  assert.deepEqual(layout.w, { col: 9, row: 0 });
+  assert.deepEqual(layout.y, { col: 9, row: 2 });
+  assert.deepEqual(layout.z, { col: 8, row: 0 }, 'the right edge skips the corner and starts its next column');
+});
+
 test('moving icons keeps their shape and snaps to the grid', () => {
   const layout: Layout = { a: { col: 0, row: 0 }, b: { col: 0, row: 1 }, c: { col: 5, row: 0 } };
   const moved = moveIcons(layout, ['a', 'b'], { cols: 2, rows: 1 }, grid);

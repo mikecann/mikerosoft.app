@@ -9,7 +9,10 @@ import {
   PLATFORM_ICON,
   formerNames,
   searchTools,
+  sortByUse,
+  splitShelved,
   tools,
+  USE_ORDER,
   type PlatformId,
   type Tool,
 } from './tools.ts';
@@ -23,6 +26,7 @@ const fixtures: Tool[] = [
     url: '',
     platforms: ['windows'],
     category: 'Desktop',
+    use: 'shelved',
   },
   {
     name: 'mac-only',
@@ -32,6 +36,7 @@ const fixtures: Tool[] = [
     url: '',
     platforms: ['macos'],
     category: 'Desktop',
+    use: 'daily',
   },
   {
     name: 'cross-platform',
@@ -41,6 +46,7 @@ const fixtures: Tool[] = [
     url: '',
     platforms: ['windows', 'macos'],
     category: 'Desktop',
+    use: 'sometimes',
   },
 ];
 
@@ -118,6 +124,32 @@ test('groups tools by category in category order, keeping their order within eac
     CATEGORY_ORDER.filter(category => tools.some(tool => tool.category === category)),
   );
   assert.equal(groups.flatMap(group => group.tools).length, tools.length);
+});
+
+test('every tool says how much I use it, and every kind of use has tools', () => {
+  for (const tool of tools) {
+    assert.ok(USE_ORDER.includes(tool.use), `${tool.name} doesn't say how much I use it`);
+  }
+  for (const use of USE_ORDER) {
+    assert.ok(tools.some(tool => tool.use === use), `nothing is ${use}`);
+  }
+});
+
+test('the tools I use every day come first and shelved ones last, otherwise keeping their order', () => {
+  const [shelved, daily, sometimes] = fixtures;
+  const anotherDaily = { ...daily, name: 'another-daily' };
+
+  assert.deepEqual(
+    sortByUse([shelved, daily, sometimes, anotherDaily]).map(tool => tool.name),
+    ['mac-only', 'another-daily', 'cross-platform', 'windows-only'],
+  );
+});
+
+test('shelved tools split off from the ones I still use, keeping their order', () => {
+  const { inUse, shelved } = splitShelved(fixtures);
+
+  assert.deepEqual(inUse.map(tool => tool.name), ['mac-only', 'cross-platform']);
+  assert.deepEqual(shelved.map(tool => tool.name), ['windows-only']);
 });
 
 test('search matches every word against names, descriptions and categories, names first', () => {
