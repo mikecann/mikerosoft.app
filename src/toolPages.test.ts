@@ -44,10 +44,12 @@ test('parses the home page, tool pages and unknown paths', () => {
   assert.deepEqual(parseRoute('/somewhere'), { kind: 'not-found' });
 });
 
-test('the copy prompt asks an agent to clone the tool repo and make it yours', () => {
+test('the copy prompt asks an agent to fork the tool repo and make it yours', () => {
   assert.equal(
     makeItYoursPrompt(fixture),
-    "Clone https://github.com/mikecann/record-it and make it my own. It's one of Mike Cann's personal tools, "
+    'Fork https://github.com/mikecann/record-it to my GitHub account and clone my fork '
+      + "(if I don't use GitHub, or want to keep my copy private, just clone it instead), then make it my own. "
+      + "It's one of Mike Cann's personal tools, "
       + 'so read the README first, change anything specific to his setup to suit mine, then help me get it running.',
   );
 });

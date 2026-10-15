@@ -33,7 +33,8 @@ export function readmeUrl(tool: Tool): string {
 
 /** The same prompt as the Get it section of each tool repo's README. */
 export function makeItYoursPrompt(tool: Tool): string {
-  return `Clone ${tool.url} and make it my own. `
+  return `Fork ${tool.url} to my GitHub account and clone my fork `
+    + "(if I don't use GitHub, or want to keep my copy private, just clone it instead), then make it my own. "
     + "It's one of Mike Cann's personal tools, so read the README first, change anything specific to his setup to suit mine, "
     + 'then help me get it running.';
 }

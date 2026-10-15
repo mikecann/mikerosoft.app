@@ -70,7 +70,7 @@ function GetIt({ tool }: { tool: Tool }) {
       </h2>
       <div className="task-pane-body">
         <p>
-          Paste this into your AI coding agent. It'll clone the code and set it up for your machine. Anything
+          Paste this into your AI coding agent. It'll fork the code and set it up for your machine. Anything
           else, just ask it.
         </p>
         <button type="button" className="copy-button" onClick={copy}>

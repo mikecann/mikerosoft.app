@@ -13,7 +13,7 @@ won't work for you out of the box.
 
 If you want to use any of this, the recommended approach is:
 
-1. Pick a tool and clone its repo. Every tool's README starts with a prompt you can paste into your AI coding agent to do this for you
+1. Pick a tool and fork its repo. Every tool's README starts with a prompt you can paste into your AI coding agent to do this for you
 2. Open it in Cursor (or your AI editor of choice) and **ask the agent to explain what each tool does and what it assumes**
 3. Customise freely - change paths, remove tools you don't need, add your own
 4. Don't open issues or pull requests. These aren't general-purpose tools and I'm not maintaining them for anyone but myself. Fork and adapt.
