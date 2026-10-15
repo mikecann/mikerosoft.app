@@ -135,8 +135,8 @@ writes `dist/tools/<old>.html` that previews the tool and redirects.
   It leads with real media: `video` first, then `screenshots`, and only falls
   back to the generated `header` art when there's nothing real. Give every tool
   real screenshots or a short clip of it working.
-- Setup on the page is one step: copy a prompt that tells your agent to clone
-  the tool's repo and make it your own (`makeItYoursPrompt`, word for word the
+- Setup on the page is one step: copy a prompt that tells your agent to fork
+  the tool's repo (or just clone it) and make it your own (`makeItYoursPrompt`, word for word the
   prompt in each tool repo's README). Don't add setup instructions to the page.
 - The page copy (a tagline and a short intro, in Mike's voice with no em dashes)
   lives in `src/toolDetails.ts`. A new tool needs an entry there or
