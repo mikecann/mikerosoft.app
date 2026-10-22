@@ -61,7 +61,7 @@ export function shareImageFor(tool: Tool, hasScreenshot: boolean): string {
  * tool rather than the home page. The React app takes over once it loads.
  */
 export function withToolMeta(html: string, tool: Tool, description: string, image: string): string {
-  const title = `${tool.name} · Mikerosoft`;
+  const title = `${tool.displayName ?? tool.name} · Mikerosoft`;
   const url = `${SITE_URL}${toolPath(tool.name)}`;
 
   const setMeta = (source: string, attr: 'name' | 'property', key: string, value: string) =>

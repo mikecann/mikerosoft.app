@@ -116,3 +116,11 @@ test('an old link previews the renamed tool and sends the browser to its new add
   assert.match(page, /<meta property="og:url" content="https:\/\/mikerosoft.app\/tools\/cutout" \/>/);
   assert.match(page, /<meta http-equiv="refresh" content="0; url=\/tools\/cutout" \/>\n<\/head>/);
 });
+
+test('uses a display name in previews while keeping the slug in links', () => {
+  const tool: Tool = { ...fixture, name: 'where-dat-space', displayName: 'Where Dat Space?' };
+  const page = withToolMeta(html, tool, 'See where your disk space went', fixture.header!);
+  assert.match(page, /<title>Where Dat Space\? · Mikerosoft<\/title>/);
+  assert.match(page, /content="Where Dat Space\? · Mikerosoft"/);
+  assert.match(page, /href="https:\/\/mikerosoft.app\/tools\/where-dat-space"/);
+});

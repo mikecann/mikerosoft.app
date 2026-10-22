@@ -72,6 +72,7 @@ SUBJECTS = [
     ('ui-get', 'an open brown cardboard box with a big green arrow pointing down into it'),
     # sheet 5: new tools
     ('time-it', 'a chunky golden amber stopwatch with a pale face, dark hands and a small green play triangle'),
+    ('where-dat-space', 'a puzzled little teal hard drive character with two large eyes and one raised eyebrow, holding a chunky amber magnifying glass; simple bold silhouette, no text or tiny details'),
 ]
 
 PROMPT = """Make a 3x3 grid of 9 separate desktop application icons for a Windows 98 styled website.

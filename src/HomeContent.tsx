@@ -16,7 +16,7 @@ function DirectoryItem({ tool }: { tool: Tool }) {
     <Link href={toolPath(tool.name)} className="directory-item">
       <img src={tool.icon} alt="" />
       <span>
-        <strong>{tool.name}</strong>
+        <strong>{tool.displayName ?? tool.name}</strong>
         <small>{toolDetails[tool.name]?.tagline ?? tool.desc}</small>
       </span>
     </Link>
