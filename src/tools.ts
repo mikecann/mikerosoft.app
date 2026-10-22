@@ -47,6 +47,8 @@ export const SHELVED_ICON = '/xp/folder.png';
 
 export interface Tool {
   name: string;
+  /** Optional human-readable title; name stays the stable URL and repository slug. */
+  displayName?: string;
   desc: string;
   /** A Mikerosoft 95 icon in public/icons. */
   icon: string;
@@ -89,9 +91,9 @@ export function splitShelved(toolList: readonly Tool[]): { inUse: Tool[]; shelve
  */
 export function searchTools(toolList: readonly Tool[], query: string): Tool[] {
   const words = query.toLowerCase().split(/\s+/).filter(Boolean);
-  const nameMatches = (tool: Tool) => words.every(word => tool.name.includes(word));
+  const nameMatches = (tool: Tool) => words.every(word => `${tool.name} ${tool.displayName ?? ''}`.toLowerCase().includes(word));
   const matches = toolList.filter(tool => {
-    const haystack = `${tool.name} ${tool.desc} ${tool.category}`.toLowerCase();
+    const haystack = `${tool.name} ${tool.displayName ?? ''} ${tool.desc} ${tool.category}`.toLowerCase();
     return words.every(word => haystack.includes(word));
   });
   return [...matches.filter(nameMatches), ...matches.filter(tool => !nameMatches(tool))];
@@ -285,6 +287,18 @@ export const tools: Tool[] = [
     category: 'Desktop',
     platforms: ['windows'],
     use: 'shelved',
+  },
+  {
+    name: 'where-dat-space',
+    displayName: 'Where Dat Space?',
+    desc: 'A native Mac disk map to see which files and folders are taking up all that space',
+    icon: '/icons/where-dat-space.png',
+    header: asset('where-dat-space', 'docs/header.webp'),
+    screenshots: [asset('where-dat-space', 'docs/screenshot.png'), asset('where-dat-space', 'docs/start.png')],
+    url: repoUrl('where-dat-space'),
+    category: 'Desktop',
+    platforms: ['macos'],
+    use: 'daily',
   },
   {
     name: 'time-it',

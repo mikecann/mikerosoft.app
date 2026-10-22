@@ -100,6 +100,13 @@ export const toolDetails: Record<string, ToolDetails> = {
       "The background is see-through so it looks like part of the taskbar, and it stays on top even when you click around. Right-click it if you want to change anything.",
     ],
   },
+  "where-dat-space": {
+    tagline: "See what's taking up all that space on your Mac",
+    intro: [
+      "My 1 TB MacBook kept filling up, so I wanted the GrandPerspective / WinDirStat sort of map I remembered. Big files get big rectangles, and I can zoom in to see what's eating the disk.",
+      "Pick a folder or scan the whole disk. It measures the space files actually take up, and you can reveal anything in Finder or move it to Trash once you've checked it. The little drive with the magnifying glass is probably as confused as I am.",
+    ],
+  },
   "time-it": {
     tagline: "Start a timer from your Mac's menu bar, even when you're offline",
     intro: [

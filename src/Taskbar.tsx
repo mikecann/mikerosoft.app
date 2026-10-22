@@ -126,7 +126,7 @@ function MenuEntries({ folders, tools: folderTools, onClose }: { folders: Progra
       {folderTools.map(tool => (
         <Link key={tool.name} href={toolPath(tool.name)} className="start-item" role="menuitem" onClick={onClose}>
           <img src={tool.icon} alt="" />
-          <span>{tool.name}</span>
+          <span>{tool.displayName ?? tool.name}</span>
         </Link>
       ))}
     </>
@@ -221,7 +221,7 @@ function StartMenu({
           {recent.map(tool => (
             <Link key={tool.name} href={toolPath(tool.name)} className="start-item" onClick={onClose}>
               <img src={tool.icon} alt="" />
-              <span>{tool.name}</span>
+              <span>{tool.displayName ?? tool.name}</span>
             </Link>
           ))}
           <hr />
@@ -354,7 +354,7 @@ function TrayUpdates() {
               <li key={tool.name}>
                 <Link href={toolPath(tool.name)} onClick={() => setOpen(false)}>
                   <img src={tool.icon} alt="" />
-                  <span><strong>{tool.name}</strong> {formatToolDate(TOOL_DATES[tool.name].updated)}</span>
+                  <span><strong>{tool.displayName ?? tool.name}</strong> {formatToolDate(TOOL_DATES[tool.name].updated)}</span>
                 </Link>
               </li>
             ))}

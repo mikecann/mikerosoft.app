@@ -187,3 +187,21 @@ test('renamed tools remember their old names', () => {
   assert.deepEqual(formerNames('cutout'), ['removebg']);
   assert.deepEqual(formerNames('record-it'), []);
 });
+
+test('publishes Where Dat Space with its display name and repository media', () => {
+  const tool = tools.find(candidate => candidate.name === 'where-dat-space');
+  assert.ok(tool);
+  assert.equal(tool.displayName, 'Where Dat Space?');
+  assert.equal(tool.url, 'https://github.com/mikecann/where-dat-space');
+  assert.equal(tool.header, 'https://cdn.jsdelivr.net/gh/mikecann/where-dat-space@main/docs/header.webp');
+  assert.deepEqual(tool.screenshots, ['https://cdn.jsdelivr.net/gh/mikecann/where-dat-space@main/docs/screenshot.png', 'https://cdn.jsdelivr.net/gh/mikecann/where-dat-space@main/docs/start.png']);
+  assert.deepEqual(tool.platforms, ['macos']);
+  assert.equal(tool.category, 'Desktop');
+  assert.equal(tool.use, 'daily');
+});
+
+test('searches a display name while keeping the slug as the route', () => {
+  const labelled: Tool = { ...fixtures[0], name: 'disk-map', displayName: 'Where Dat Space?' };
+  assert.deepEqual(searchTools([labelled], 'WHERE DAT'), [labelled]);
+  assert.deepEqual(searchTools([labelled], 'disk-map'), [labelled]);
+});

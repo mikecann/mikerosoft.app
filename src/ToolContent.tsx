@@ -105,7 +105,7 @@ function Media({ tool }: { tool: Tool }) {
         <h2 className="section-head"><img src={CATEGORY_ICON.Images} alt="" />Screenshots</h2>
         {tool.header && (
           <div className="media-stage" data-art>
-            <img src={tool.header} alt={`Artwork for ${tool.name}`} />
+            <img src={tool.header} alt={`Artwork for ${tool.displayName ?? tool.name}`} />
           </div>
         )}
         <p className="media-note">This is artwork I made for the tool, not a screenshot. Real ones are coming soon.</p>
@@ -126,7 +126,7 @@ function Media({ tool }: { tool: Tool }) {
           <video key={current.src} src={current.src} controls autoPlay muted loop playsInline />
         ) : (
           <button type="button" className="plain zoom" onClick={() => setViewing(images.indexOf(current.src))} aria-label="Open full size">
-            <img src={current.src} alt={`Screenshot of ${tool.name}`} />
+            <img src={current.src} alt={`Screenshot of ${tool.displayName ?? tool.name}`} />
           </button>
         )}
       </div>
@@ -237,7 +237,7 @@ export function ToolContent({ tool }: { tool: Tool }) {
           <header className="tool-head">
             <img src={tool.icon} alt="" />
             <div>
-              <h1>{tool.name}</h1>
+              <h1>{tool.displayName ?? tool.name}</h1>
               <p className="chips">
                 {sortPlatforms(tool.platforms).map(id => (
                   <span key={id}><img src={PLATFORM_ICON[id]} alt="" />{PLATFORM_LABEL[id]}</span>

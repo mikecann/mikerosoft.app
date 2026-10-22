@@ -107,7 +107,7 @@ const desktopItems: DesktopItem[] = [
   { id: 'github', label: 'GitHub', icon: '/xp/github.png', href: REPO_URL, external: true },
   ...inUse.map(tool => ({
     id: tool.name,
-    label: tool.name,
+    label: tool.displayName ?? tool.name,
     icon: tool.icon,
     href: toolPath(tool.name),
     sourceUrl: tool.url,
@@ -136,7 +136,7 @@ export default function App() {
   /** The title and icon each window shows in its title bar and on the taskbar. */
   function windowInfo(id: WindowId): { title: string; taskTitle: string; icon: string } {
     const tool = toolFor(id);
-    if (tool) return { title: `${tool.name} - Mikerosoft`, taskTitle: tool.name, icon: tool.icon };
+    if (tool) return { title: `${tool.displayName ?? tool.name} - Mikerosoft`, taskTitle: tool.displayName ?? tool.name, icon: tool.icon };
     if (id === DATE_TIME) return { title: 'Date and Time Properties', taskTitle: 'Date and Time Properties', icon: '/icons/ui-calendar.png' };
     if (id === SHELVED) return { title: 'Shelved', taskTitle: 'Shelved', icon: SHELVED_ICON };
     return { title: 'Mikerosoft', taskTitle: 'Mikerosoft', icon: '/logo.png' };
@@ -187,7 +187,7 @@ export default function App() {
   const topPath = topWindow && pathForWindow(topWindow.id);
   useEffect(() => {
     if (topPath) replacePath(topPath);
-    document.title = focusedTool ? `${focusedTool.name} - Mikerosoft` : 'Mikerosoft';
+    document.title = focusedTool ? `${focusedTool.displayName ?? focusedTool.name} - Mikerosoft` : 'Mikerosoft';
   }, [topPath, focusedTool]);
 
   function openGithub() {
