@@ -272,11 +272,11 @@ export const toolDetails: Record<string, ToolDetails> = {
     ],
   },
   "snap-it": {
-    tagline: "Press F11 to grab part of the screen and start marking it up",
+    tagline: "Press ⌘⇧4, grab part of the screen and start drawing arrows on it straight away",
     intro: [
-      "A little background helper for macOS. You press F11, drag out the bit of the screen you want, and it saves it to `~/Desktop/Screenshots` with a timestamp name, copies it to the clipboard and opens it in Preview so you can scribble on it straight away.",
-      "It starts on login, so once it's set up you can mostly forget about it.",
-      "It used to be called `mac-screenshot`.",
+      "My own little replacement for CleanShot X. I was using CleanShot for basically one thing: grab a bit of the screen, slap a pink arrow on it and paste it into a chat. So I made a tool that does just that, and does it fast.",
+      "It lives in the menu bar. Press ⌘⇧4, drag out an area and an editor pops up with the arrow tool ready to go. The screenshot is already saved to `~/Screenshots` and on your clipboard, so if you don't want to draw anything you can just paste it.",
+      "It used to be a Python script that opened Preview, and before that it was called `mac-screenshot`.",
     ],
   },
 };
