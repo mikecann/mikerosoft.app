@@ -57,7 +57,8 @@ To add a new tool to the site:
    ideally real screenshots in `docs/`.
 2. Add it to `src/tools.ts`: `url: repoUrl('<name>')`, media with
    `asset('<name>', 'docs/...')`, which serves the file from the repo's `main`
-   through jsDelivr, and a `use` (see below).
+   through jsDelivr, and a `use` (see below). If the tool's title isn't its
+   slug (like `Where Dat Space?`), set `displayName`; the slug stays the URL.
 3. Add its page copy to `src/toolDetails.ts`.
 4. Draw its icon (`public/icons/<name>.png`, see below).
 5. Take its share image (`public/share/<name>.jpg`, see below).
