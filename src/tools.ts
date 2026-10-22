@@ -577,14 +577,13 @@ export const tools: Tool[] = [
   },
   {
     name: 'snap-it',
-    desc: 'Global macOS screenshot hotkey daemon. Press F11 to capture a selection, save it with a timestamp, copy it to the clipboard, and open it in Preview for annotation',
+    desc: 'My CleanShot X replacement: press ⌘⇧4, grab part of the screen and draw arrows on it straight away',
     icon: '/icons/snap-it.png',
     header: asset('snap-it', 'docs/header.webp'),
-    video: asset('snap-it', 'docs/demo.mp4'),
     screenshots: [asset('snap-it', 'docs/preview.png')],
     url: repoUrl('snap-it'),
     category: 'Images',
     platforms: ['macos'],
-    use: 'shelved',
+    use: 'daily',
   },
 ];
