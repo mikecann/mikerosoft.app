@@ -586,4 +586,20 @@ export const tools: Tool[] = [
     platforms: ['macos'],
     use: 'daily',
   },
+  {
+    name: 'plugboard',
+    desc: 'One MCP gateway for all my agents: sign in to Notion, Gmail, Sentry and the rest once, and every Claude login, Codex and Grok gets them through one URL, with sends waiting for my approval and every call logged',
+    icon: '/icons/plugboard.png',
+    header: asset('plugboard', 'docs/header.webp'),
+    video: asset('plugboard', 'docs/media/plugboard.mp4'),
+    screenshots: [
+      asset('plugboard', 'docs/admin.png'),
+      asset('plugboard', 'docs/approval.png'),
+      asset('plugboard', 'docs/connect.png'),
+    ],
+    url: repoUrl('plugboard'),
+    category: 'Developer',
+    platforms: ['macos'],
+    use: 'daily',
+  },
 ];

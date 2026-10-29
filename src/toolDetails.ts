@@ -279,4 +279,12 @@ export const toolDetails: Record<string, ToolDetails> = {
       "It used to be a Python script that opened Preview, and before that it was called `mac-screenshot`.",
     ],
   },
+  plugboard: {
+    tagline: "Sign in to Notion, Gmail and the rest once, and every one of my agents gets them",
+    intro: [
+      "I've got a few Claude Code logins plus Codex and Grok, and connectors in those apps belong to one login of one app. So every new account meant signing in to Notion, Gmail and Sentry all over again, and a thread that moved to another account might suddenly not have my Gmail. Plugboard is a little MCP server I run myself that signs in to each service once, then every agent points at the same URL with its own token.",
+      "Because every call goes through it, it's also where I get to say \"ask me first\". Sending an email or deleting a Notion page waits on an approval page until I say yes, and there's a log of what each agent called and with what. I run mine on my other Mac over Tailscale, so approvals still work while my laptop's asleep.",
+      "It started out as `connectors`, and the command and the code still go by that name.",
+    ],
+  },
 };
