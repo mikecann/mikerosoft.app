@@ -84,6 +84,8 @@ SUBJECTS = [
     ('ui-apps', 'a white instant-camera photo print showing four rounded square app icons in blue, green, orange and yellow, with a strip of yellow tape across its top edge'),
     ('ui-logoff', 'a chunky golden key lying diagonally'),
     ('ui-shutdown', 'a round red button with a bold white power symbol'),
+    # rest of sheet 6: new tools
+    ('mitts', 'a chunky red knitted woollen mitten with a cream ribbed cuff, its thumb pressing the button on a small blue application window'),
 ]
 
 PROMPT = """Make a 3x3 grid of 9 separate desktop application icons for a Windows 98 styled website.

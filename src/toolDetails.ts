@@ -287,4 +287,12 @@ export const toolDetails: Record<string, ToolDetails> = {
       "It started out as `connectors`, and the command and the code still go by that name.",
     ],
   },
+  mitts: {
+    tagline: "Lets my AI agents click around in the apps on my Mac",
+    intro: [
+      "I wanted my agents to be able to use the apps on my Mac and not just the terminal. I'd been leaning on Codex's computer use for that, but then the ChatGPT app added a check that locked out the little bridge I'd built on top of it, so I figured it was time to have my own.",
+      "It's the desktop sibling of Paws, my Chrome extension for agents, and it does the stuff Paws can't: Finder, System Settings, file pickers, permission dialogs, and pages like the Chrome Web Store dashboard that extensions aren't allowed anywhere near. It reads the Accessibility API rather than screenshots, so the agent gets a short list of things it can click, and every click answers with just what changed.",
+      "When it hits a password or a passkey it doesn't try anything clever, it pops up a little panel on that window and waits for me to click Done.",
+    ],
+  },
 };

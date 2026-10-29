@@ -602,4 +602,15 @@ export const tools: Tool[] = [
     platforms: ['macos'],
     use: 'daily',
   },
+  {
+    name: 'mitts',
+    desc: 'Lets my agents click around in the apps on my Mac (Finder, System Settings, file pickers, the Chrome Web Store) through the Accessibility API, and hands over to me for passkeys',
+    icon: '/icons/mitts.png',
+    header: asset('mitts', 'docs/header.webp'),
+    screenshots: [asset('mitts', 'docs/demo.png'), asset('mitts', 'docs/handoff.png')],
+    url: repoUrl('mitts'),
+    category: 'Developer',
+    platforms: ['macos'],
+    use: 'daily',
+  },
 ];
