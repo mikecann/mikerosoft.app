@@ -74,6 +74,16 @@ SUBJECTS = [
     ('time-it', 'a chunky golden amber stopwatch with a pale face, dark hands and a small green play triangle'),
     ('where-dat-space', 'a puzzled little teal hard drive character with two large eyes and one raised eyebrow, holding a chunky amber magnifying glass; simple bold silhouette, no text or tiny details'),
     ('plugboard', 'a small dark grey patch panel with a row of round sockets, one chunky green cable plugged into the middle socket with a white electrical plug on its other end'),
+    # rest of sheet 5, and sheet 6: more icons for the site itself. The Start
+    # menu ones replaced Windows XP's own, which are Microsoft's artwork.
+    ('ui-programs', 'a round glossy green button with a bold white arrow pointing right'),
+    ('ui-folder', 'an open yellow manila folder with a small silver wrench poking out of the top'),
+    ('ui-help', 'a round blue button with a bold white question mark'),
+    ('ui-search', 'a chunky magnifying glass with a silver rim, pale blue glass and a brown handle'),
+    ('ui-run', 'a small grey application window with a bold green arrow shooting out of it to the right'),
+    ('ui-apps', 'a white instant-camera photo print showing four rounded square app icons in blue, green, orange and yellow, with a strip of yellow tape across its top edge'),
+    ('ui-logoff', 'a chunky golden key lying diagonally'),
+    ('ui-shutdown', 'a round red button with a bold white power symbol'),
 ]
 
 PROMPT = """Make a 3x3 grid of 9 separate desktop application icons for a Windows 98 styled website.

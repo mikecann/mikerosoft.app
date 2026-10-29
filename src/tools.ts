@@ -43,7 +43,7 @@ export const USE_LABEL: Record<Use, string> = {
   shelved: 'Shelved',
 };
 
-export const SHELVED_ICON = '/xp/folder.png';
+export const SHELVED_ICON = '/icons/ui-folder.png';
 
 export interface Tool {
   name: string;

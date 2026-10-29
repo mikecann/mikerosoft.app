@@ -74,7 +74,7 @@ function GetIt({ tool }: { tool: Tool }) {
           else, just ask it.
         </p>
         <button type="button" className="copy-button" onClick={copy}>
-          <img src="/xp/run.png" alt="" />
+          <img src="/icons/ui-run.png" alt="" />
           Copy prompt
         </button>
         <p className="copy-status" role="status">{status}</p>

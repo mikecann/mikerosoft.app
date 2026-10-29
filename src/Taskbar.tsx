@@ -240,12 +240,12 @@ function StartMenu({
             }}
           >
             <span>All Programs</span>
-            <img src="/xp/all-programs.ico" alt="" />
+            <img src="/icons/ui-programs.png" alt="" />
           </button>
         </div>
         <div className="start-right" onKeyDown={moveFocus} onPointerEnter={hover(false)}>
           <button type="button" className="plain start-item start-item-bold" onClick={then(onOpenHome)}>
-            <img src="/xp/folder.png" alt="" />
+            <img src="/icons/ui-folder.png" alt="" />
             <span>My Tools</span>
           </button>
           {CATEGORY_ORDER.map(category => (
@@ -264,15 +264,15 @@ function StartMenu({
             <span>Surprise me</span>
           </button>
           <button type="button" className="plain start-item" onClick={then(onHelp)}>
-            <img src="/xp/help.png" alt="" />
+            <img src="/icons/ui-help.png" alt="" />
             <span>Help and Support</span>
           </button>
           <button type="button" className="plain start-item" onClick={then(onSearch)}>
-            <img src="/xp/search.png" alt="" />
+            <img src="/icons/ui-search.png" alt="" />
             <span>Search</span>
           </button>
           <button type="button" className="plain start-item" onClick={then(onRun)}>
-            <img src="/xp/run.png" alt="" />
+            <img src="/icons/ui-run.png" alt="" />
             <span>Run...</span>
           </button>
         </div>
@@ -284,11 +284,11 @@ function StartMenu({
       </div>
       <div className="start-foot">
         <button type="button" className="plain start-foot-button" onClick={then(onLogOff)}>
-          <img src="/xp/logoff.png" alt="" />
+          <img src="/icons/ui-logoff.png" alt="" />
           Log Off
         </button>
         <button type="button" className="plain start-foot-button" onClick={then(onTurnOff)}>
-          <img src="/xp/shutdown.png" alt="" />
+          <img src="/icons/ui-shutdown.png" alt="" />
           Turn Off Computer
         </button>
       </div>

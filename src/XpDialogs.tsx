@@ -19,7 +19,7 @@ function Overlay({ onClose, children }: { onClose: () => void; children: ReactNo
 
 export function MessageDialog({
   title,
-  icon = '/xp/help.png',
+  icon = '/icons/ui-help.png',
   children,
   onClose,
 }: {
@@ -70,7 +70,7 @@ export function ImageViewer({
       <div className="window viewer" role="dialog" aria-modal="true" aria-label="Picture viewer">
         <div className="title-bar">
           <div className="title-bar-text">
-            <img src="/xp/search.png" alt="" />
+            <img src="/icons/ui-search.png" alt="" />
             <span>{images[index].split('/').pop()} - Windows Picture and Fax Viewer</span>
           </div>
           <div className="title-bar-controls">
@@ -231,10 +231,10 @@ export function RunDialog({
   }
 
   return (
-    <DialogFrame title="Run" icon="/xp/run.png" className="run" onClose={onClose}>
+    <DialogFrame title="Run" icon="/icons/ui-run.png" className="run" onClose={onClose}>
       <form className="window-body run-body" onSubmit={submit}>
         <div className="run-intro">
-          <img src="/xp/run.png" alt="" />
+          <img src="/icons/ui-run.png" alt="" />
           <p>Type the name of a tool, and Mikerosoft will open it for you.</p>
         </div>
         <div className="field-row">

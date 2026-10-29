@@ -105,6 +105,8 @@ const { inUse, shelved } = splitShelved(groupToolsByCategory(tools).flatMap(grou
 const desktopItems: DesktopItem[] = [
   { id: 'home', label: 'Mikerosoft', icon: '/logo.png', href: '/' },
   { id: 'github', label: 'GitHub', icon: '/xp/github.png', href: REPO_URL, external: true },
+  // My other site. Apps you open in a browser or get from the App Store live there, and it links back here.
+  { id: 'mikecann', label: "Mike's Apps", icon: '/icons/ui-apps.png', href: 'https://mikecann.app', external: true },
   ...inUse.map(tool => ({
     id: tool.name,
     label: tool.displayName ?? tool.name,
@@ -115,7 +117,7 @@ const desktopItems: DesktopItem[] = [
   { id: 'shelved', label: 'Shelved', icon: SHELVED_ICON },
 ];
 // The ones I use every day go down the left edge, and the shelved ones live in a folder in the corner.
-const leftIds = ['home', 'github', ...inUse.map(tool => tool.name)];
+const leftIds = ['home', 'github', 'mikecann', ...inUse.map(tool => tool.name)];
 const cornerIds = ['shelved'];
 
 export default function App() {
@@ -390,7 +392,7 @@ export default function App() {
         </MessageDialog>
       )}
       {dialog === 'log-off' && (
-        <MessageDialog title="Log Off Mikerosoft" icon="/xp/logoff.png" onClose={() => setDialog(null)}>
+        <MessageDialog title="Log Off Mikerosoft" icon="/icons/ui-logoff.png" onClose={() => setDialog(null)}>
           <p>You can't log off, there's nobody logged on. It's just a website.</p>
         </MessageDialog>
       )}
@@ -411,7 +413,7 @@ export default function App() {
         />
       )}
       {dialog === 'not-found' && (
-        <MessageDialog title="Mikerosoft" icon="/xp/help.png" onClose={() => { setDialog(null); navigate('/'); }}>
+        <MessageDialog title="Mikerosoft" icon="/icons/ui-help.png" onClose={() => { setDialog(null); navigate('/'); }}>
           <p>Hmm, I couldn't find that one. Maybe the tool got renamed?</p>
           <p>Every tool is on the desktop, or in Start, All Programs.</p>
         </MessageDialog>

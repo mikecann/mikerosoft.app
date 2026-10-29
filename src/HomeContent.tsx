@@ -70,7 +70,7 @@ export function HomeContent({
     <>
       <div className="xp-toolbar">
         <label className="xp-toolbar-field">
-          <img src="/xp/search.png" alt="" />
+          <img src="/icons/ui-search.png" alt="" />
           <span className="sr-only">Find a tool</span>
           <input
             id={HOME_SEARCH_ID}

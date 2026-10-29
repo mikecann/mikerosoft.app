@@ -21,6 +21,18 @@ Tools that were renamed when they moved out: `video-to-markdown` is
 `prompter-kit` is the shared Swift package taskbar, video-hq and telemprompit
 use for the Elgato Prompter.
 
+Mike has two sites, and each new thing goes on one of them. This one is for
+the little tools he built for his own machines, shared as repos for people to
+fork and make their own. Apps you open in a browser or get from the App Store,
+including the ones just for him and the family, go on mikecann.app instead
+(github.com/mikecann/mikecann-app). The Mike's Apps shortcut on the desktop
+links there, and mikecann.app links back from its Elsewhere section.
+
+The name is a joke on Microsoft, so keep the site free, keep the "in no way
+affiliated with Microsoft" line on the home window, and don't use Microsoft's
+own artwork or logos. Anything that should look like XP gets drawn by our icon
+generator instead (see below).
+
 ## Key rules
 
 - **Use test-first development for non-trivial changes.** Write or update the
@@ -98,8 +110,13 @@ writes `dist/tools/<old>.html` that previews the tool and redirects.
 - The desktop wallpaper (`public/wallpaper.webp`) is an original
   Bliss-style image generated for this site (rolling green hill, blue sky,
   a few clouds) - not Microsoft's copyrighted photo and not Convex OS's
-  logo-bearing copy of it. The small XP icons in `public/xp` come
-  from Convex OS, which borrowed them from github.com/ShizukuIchi/winXP.
+  logo-bearing copy of it. The Start menu and dialog icons (`ui-programs`,
+  `ui-folder`, `ui-help`, `ui-search`, `ui-run`, `ui-logoff`, `ui-shutdown`)
+  are our own drawings too. They replaced Windows XP's own icons, which had
+  come from github.com/ShizukuIchi/winXP by way of Convex OS and are
+  Microsoft's artwork. Only GitHub's mark is left in `public/xp`, for the
+  GitHub links, and `src/assets.test.ts` fails if anything else turns up
+  there or if the code points at an image that isn't in `public`.
 - Tools come from `src/tools.ts`. Each one needs a `category`, a
   `url` of its own repo, and its own icon at `public/icons/<name>.png`. The icons are high-res
   famfamfam-style drawings made with `scripts/icons/generate.py` and
