@@ -624,6 +624,7 @@ export const tools: Tool[] = [
     desc: 'My own computer history: it keeps track of what I do on my Mac, Claude writes it up every 10 minutes, and my agents can look back through it',
     icon: '/icons/remembear.png',
     header: asset('remembear', 'docs/header.webp'),
+    video: asset('remembear', 'docs/media/remembear.mp4'),
     screenshots: [asset('remembear', 'docs/summary.png'), asset('remembear', 'docs/setup.png')],
     url: repoUrl('remembear'),
     category: 'Developer',
