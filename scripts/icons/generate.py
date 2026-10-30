@@ -86,6 +86,7 @@ SUBJECTS = [
     ('ui-shutdown', 'a round red button with a bold white power symbol'),
     # rest of sheet 6: new tools
     ('computercub', 'a cute little brown bear cub sitting in front of a small computer monitor, one paw resting on a white computer mouse'),
+    ('remembear', 'a cute little brown bear cub hugging a chunky round alarm clock with a pale face, a bold blue curved arrow wrapping around the clock anticlockwise'),
 ]
 
 PROMPT = """Make a 3x3 grid of 9 separate desktop application icons for a Windows 98 styled website.

@@ -618,4 +618,16 @@ export const tools: Tool[] = [
     platforms: ['macos'],
     use: 'daily',
   },
+  {
+    name: 'remembear',
+    displayName: 'RememBear',
+    desc: 'My own computer history: it keeps track of what I do on my Mac, Claude writes it up every 10 minutes, and my agents can look back through it',
+    icon: '/icons/remembear.png',
+    header: asset('remembear', 'docs/header.webp'),
+    screenshots: [asset('remembear', 'docs/summary.png'), asset('remembear', 'docs/setup.png')],
+    url: repoUrl('remembear'),
+    category: 'Developer',
+    platforms: ['macos'],
+    use: 'daily',
+  },
 ];

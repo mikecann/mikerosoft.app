@@ -296,4 +296,13 @@ export const toolDetails: Record<string, ToolDetails> = {
       "It started out as `mitts`. It's a bear now because it plugs into Threadbear, the app I run my agents in, same as BrowserBear.",
     ],
   },
+  remembear: {
+    tagline: "A computer history for my Mac that I own, so my agents can remember what I was doing",
+    intro: [
+      "ChatGPT's desktop app has a Computer History feature that I'd been using so my agents could answer stuff like \"what was I doing on Tuesday afternoon?\". I liked it, but I didn't love OpenAI having a running log of my whole day, so I turned it off and made my own.",
+      "It's a little menu bar app that reads the window in front from a screenshot, using the Mac's own text recognition, and throws the picture away straight after. Every 10 minutes it asks Claude (on my own subscription) to write a short summary of what I got up to, and every 6 hours a longer one, as Markdown files my agents can read. There's also `remembear search`, which finds a moment by what was on screen, using an embedding model that runs on the Mac.",
+      "I was a bit paranoid about what it might pick up, so it never records incognito windows, password managers or terminals, it masks anything that looks like a key, and it skips any page that's showing you a new one. The raw events get deleted after 48 hours too.",
+      "It was called Recall It for about a day. It's a bear now because it plugs into Threadbear, the app I run my agents in, same as BrowserBear and ComputerCub.",
+    ],
+  },
 };
