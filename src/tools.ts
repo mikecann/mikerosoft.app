@@ -611,6 +611,7 @@ export const tools: Tool[] = [
     desc: 'Computer use for my Mac: my agents click around in its apps (Finder, System Settings, file pickers, the Chrome Web Store) through the Accessibility API, and hand over to me for passkeys',
     icon: '/icons/computercub.png',
     header: asset('computercub', 'docs/header.webp'),
+    video: asset('computercub', 'docs/media/computercub.mp4'),
     screenshots: [asset('computercub', 'docs/demo.png'), asset('computercub', 'docs/handoff.png')],
     url: repoUrl('computercub'),
     category: 'Developer',
