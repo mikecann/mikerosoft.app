@@ -111,6 +111,7 @@ export const RENAMED_TOOLS: Readonly<Record<string, string>> = {
   ctxmenu: 'right-click-tidy',
   'generate-from-image': 'img-remix',
   worktrees: 'worktree-tidy',
+  mitts: 'computercub',
 };
 
 /** The names a tool went by before it was renamed, if any. */
@@ -603,12 +604,13 @@ export const tools: Tool[] = [
     use: 'daily',
   },
   {
-    name: 'mitts',
-    desc: 'Lets my agents click around in the apps on my Mac (Finder, System Settings, file pickers, the Chrome Web Store) through the Accessibility API, and hands over to me for passkeys',
-    icon: '/icons/mitts.png',
-    header: asset('mitts', 'docs/header.webp'),
-    screenshots: [asset('mitts', 'docs/demo.png'), asset('mitts', 'docs/handoff.png')],
-    url: repoUrl('mitts'),
+    name: 'computercub',
+    displayName: 'ComputerCub',
+    desc: 'Computer use for my Mac: my agents click around in its apps (Finder, System Settings, file pickers, the Chrome Web Store) through the Accessibility API, and hand over to me for passkeys',
+    icon: '/icons/computercub.png',
+    header: asset('computercub', 'docs/header.webp'),
+    screenshots: [asset('computercub', 'docs/demo.png'), asset('computercub', 'docs/handoff.png')],
+    url: repoUrl('computercub'),
     category: 'Developer',
     platforms: ['macos'],
     use: 'daily',
