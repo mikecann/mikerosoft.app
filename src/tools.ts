@@ -112,6 +112,7 @@ export const RENAMED_TOOLS: Readonly<Record<string, string>> = {
   'generate-from-image': 'img-remix',
   worktrees: 'worktree-tidy',
   mitts: 'computercub',
+  plugboard: 'plugbear',
 };
 
 /** The names a tool went by before it was renamed, if any. */
@@ -588,17 +589,18 @@ export const tools: Tool[] = [
     use: 'daily',
   },
   {
-    name: 'plugboard',
+    name: 'plugbear',
+    displayName: 'PlugBear',
     desc: 'One MCP gateway for all my agents: sign in to Notion, Gmail, Sentry and the rest once, and every Claude login, Codex and Grok gets them through one URL, with sends waiting for my approval and every call logged',
-    icon: '/icons/plugboard.png',
-    header: asset('plugboard', 'docs/header.webp'),
-    video: asset('plugboard', 'docs/media/plugboard.mp4'),
+    icon: '/icons/plugbear.png',
+    header: asset('plugbear', 'docs/header.webp'),
+    video: asset('plugbear', 'docs/media/plugbear.mp4'),
     screenshots: [
-      asset('plugboard', 'docs/admin.png'),
-      asset('plugboard', 'docs/approval.png'),
-      asset('plugboard', 'docs/connect.png'),
+      asset('plugbear', 'docs/admin.png'),
+      asset('plugbear', 'docs/approval.png'),
+      asset('plugbear', 'docs/connect.png'),
     ],
-    url: repoUrl('plugboard'),
+    url: repoUrl('plugbear'),
     category: 'Developer',
     platforms: ['macos'],
     use: 'daily',

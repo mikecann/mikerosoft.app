@@ -73,7 +73,7 @@ SUBJECTS = [
     # sheet 5: new tools
     ('time-it', 'a chunky golden amber stopwatch with a pale face, dark hands and a small green play triangle'),
     ('where-dat-space', 'a puzzled little teal hard drive character with two large eyes and one raised eyebrow, holding a chunky amber magnifying glass; simple bold silhouette, no text or tiny details'),
-    ('plugboard', 'a small dark grey patch panel with a row of round sockets, one chunky green cable plugged into the middle socket with a white electrical plug on its other end'),
+    ('plugbear', 'a small dark grey patch panel with a row of round sockets, one chunky green cable plugged into the middle socket with a white electrical plug on its other end'),
     # rest of sheet 5, and sheet 6: more icons for the site itself. The Start
     # menu ones replaced Windows XP's own, which are Microsoft's artwork.
     ('ui-programs', 'a round glossy green button with a bold white arrow pointing right'),
