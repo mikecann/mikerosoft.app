@@ -305,4 +305,11 @@ export const toolDetails: Record<string, ToolDetails> = {
       "It was called Recall It for about a day. It's a bear now because it plugs into Threadbear, the app I run my agents in, same as BrowserBear and ComputerCub.",
     ],
   },
+  "menu-bar-by-display": {
+    tagline: "Keeps the menu bar on screen on a MacBook, and hides it again when you plug in a monitor",
+    intro: [
+      "I've been using my MacBook as my main screen lately, and on a laptop with a notch that strip at the top is dead space anyway. Even full screen windows stop below the notch, so having the menu bar auto-hide there just meant hovering up at the top for nothing.",
+      "On a big external monitor I do like it hidden though, and macOS only has the one setting for every screen. So this little background tool flips it for you: the menu bar is always shown when it's just the laptop screen, and goes back to auto-hiding as soon as a monitor is plugged in.",
+    ],
+  },
 };

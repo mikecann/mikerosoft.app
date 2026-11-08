@@ -631,4 +631,15 @@ export const tools: Tool[] = [
     platforms: ['macos'],
     use: 'daily',
   },
+  {
+    name: 'menu-bar-by-display',
+    desc: 'Keeps the macOS menu bar on screen when the MacBook is the only display, where the notch wastes that strip anyway, and auto-hides it again when a monitor is plugged in',
+    icon: '/icons/menu-bar-by-display.png',
+    header: asset('menu-bar-by-display', 'docs/header.webp'),
+    screenshots: [asset('menu-bar-by-display', 'docs/menu-bar.png')],
+    url: repoUrl('menu-bar-by-display'),
+    category: 'Desktop',
+    platforms: ['macos'],
+    use: 'daily',
+  },
 ];
