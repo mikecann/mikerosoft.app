@@ -6,11 +6,12 @@
   "scripts": {
     "dates": "tsx scripts/generate-tool-dates.ts",
     "changelog": "tsx scripts/generate-changelogs.ts",
+    "check-assets": "tsx scripts/check-tool-assets.ts",
     "share-images": "tsx scripts/share-images.ts",
     "predev": "npm run dates && npm run changelog",
     "dev": "vite",
     "test": "tsx --test src/*.test.ts",
-    "prebuild": "npm run dates && npm run changelog",
+    "prebuild": "npm run dates && npm run changelog && npm run check-assets",
     "build": "tsc -b && vite build && tsx scripts/generate-tool-pages.ts",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy"

@@ -133,6 +133,11 @@ writes `dist/tools/<old>.html` that previews the tool and redirects.
   before moving a tool between them. Changing the default desktop
   arrangement means bumping `STORAGE_KEY` in `src/Desktop.tsx`, or anyone
   with a saved layout never sees it.
+- `npm run build` fails (through `npm run check-assets`) if a tool page
+  points at an image or video its repo's `main` doesn't have, since
+  jsDelivr would serve a broken image. voice-type's page showed one for a
+  month after its old `docs/ss1.png` went with the Python version. Fix it by
+  adding real media to the tool repo and pointing `src/tools.ts` at it.
 - Give every tool repo a `docs/header.webp` (1376x768). It's used as the
   share image until one's been taken, and as the tool page's artwork when
   there are no real screenshots yet. jsDelivr caches `@main` files for up to

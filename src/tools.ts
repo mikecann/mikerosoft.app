@@ -137,6 +137,28 @@ export function asset(repo: string, path: string): string {
   return `https://cdn.jsdelivr.net/gh/mikecann/${repo}@main/${path}`;
 }
 
+const ASSET_URL = /^https:\/\/cdn\.jsdelivr\.net\/gh\/mikecann\/([^@/]+)@main\/(.+)$/;
+
+/** The repo and path behind an `asset()` URL, or undefined for any other URL. */
+export function assetSource(url: string): { repo: string; path: string } | undefined {
+  const match = ASSET_URL.exec(url);
+  return match ? { repo: match[1], path: match[2] } : undefined;
+}
+
+/** Every file a tool's page loads from a tool repo. */
+export function toolAssets(tool: Tool): { repo: string; path: string }[] {
+  return [tool.header, tool.video, ...tool.screenshots]
+    .map(url => (url ? assetSource(url) : undefined))
+    .filter(source => source !== undefined);
+}
+
+/** The files a tool's page loads from its repo that aren't on its main branch any more. */
+export function missingToolAssets(tool: Tool, filesInRepo: ReadonlySet<string>): string[] {
+  return toolAssets(tool)
+    .filter(source => source.repo === tool.name && !filesInRepo.has(source.path))
+    .map(source => source.path);
+}
+
 export const tools: Tool[] = [
   {
     name: 'transcribe',
@@ -454,13 +476,13 @@ export const tools: Tool[] = [
   },
   {
     name: 'voice-type',
-    desc: 'Push-to-talk local voice transcription for Windows and macOS. On Apple Silicon it uses MLX for faster final transcription',
+    desc: 'Push-to-talk dictation for the Mac that runs Whisper locally on the GPU and types wherever you are',
     icon: '/icons/voice-type.png',
     header: asset('voice-type', 'docs/header.webp'),
-    screenshots: [asset('voice-type', 'docs/ss1.png')],
+    screenshots: [asset('voice-type', 'docs/pill-recording.png'), asset('voice-type', 'docs/pill-done.png')],
     url: repoUrl('voice-type'),
     category: 'Desktop',
-    platforms: ['windows', 'macos'],
+    platforms: ['macos'],
     use: 'daily',
   },
   {

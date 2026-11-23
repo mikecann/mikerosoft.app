@@ -196,7 +196,7 @@ export const toolDetails: Record<string, ToolDetails> = {
     tagline: "Hold a key, talk, let go, and your words get typed wherever you are",
     intro: [
       "This is push-to-talk dictation that runs entirely on your own machine, so no cloud and no subscription. You hold the hotkey, a little pill appears at the bottom of the screen with a waveform and a rough preview of what you're saying, and when you let go the final text gets typed into whatever window has focus.",
-      "It uses Whisper under the hood. On an NVIDIA GPU or an Apple Silicon Mac (via MLX) it's pretty quick, and on plain CPU it drops to smaller models so it still keeps up. It also leaves your clipboard alone, which I was quite happy about.",
+      "It's Mac only now and runs Whisper on the GPU, so a short clip gets typed about a third of a second after you let go. It also puts your clipboard back afterwards, which I was quite happy about.",
     ],
   },
   "video-titles": {

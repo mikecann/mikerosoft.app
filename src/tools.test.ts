@@ -8,6 +8,9 @@ import {
   groupToolsByCategory,
   PLATFORM_ICON,
   formerNames,
+  asset,
+  assetSource,
+  missingToolAssets,
   searchTools,
   SHELVED_ICON,
   splitShelved,
@@ -204,4 +207,21 @@ test('searches a display name while keeping the slug as the route', () => {
   const labelled: Tool = { ...fixtures[0], name: 'disk-map', displayName: 'Where Dat Space?' };
   assert.deepEqual(searchTools([labelled], 'WHERE DAT'), [labelled]);
   assert.deepEqual(searchTools([labelled], 'disk-map'), [labelled]);
+});
+
+test('assetSource reads the repo and path back out of an asset URL', () => {
+  assert.deepEqual(assetSource(asset('voice-type', 'docs/pill-done.png')), { repo: 'voice-type', path: 'docs/pill-done.png' });
+  assert.equal(assetSource('https://example.com/x.png'), undefined);
+});
+
+test('missingToolAssets lists page media the tool repo no longer has', () => {
+  const tool: Tool = {
+    ...fixtures[1],
+    name: 'demo',
+    header: asset('demo', 'docs/header.webp'),
+    video: asset('demo', 'docs/demo.mp4'),
+    screenshots: [asset('demo', 'docs/ss1.png'), asset('demo', 'docs/ss2.png')],
+  };
+  const files = new Set(['docs/header.webp', 'docs/ss2.png']);
+  assert.deepEqual(missingToolAssets(tool, files), ['docs/demo.mp4', 'docs/ss1.png']);
 });
